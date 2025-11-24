@@ -25,59 +25,74 @@ st.markdown("""
         text-align: center;
         border: 1px solid #4CAF50;
     }
-    .info-card { background-color: #1e2130; padding: 20px; border-radius: 10px; border: 1px solid #30363d; margin-bottom: 15px; }
-    .stButton>button { background-color: #00adb5; color: white; border-radius: 6px; border: none; }
-    .stButton>button:hover { background-color: #008c93; }
-    
-    .stChatMessage { background-color: #262730; border: 1px solid #30363d; border-radius: 10px; }
+
+    .info-card {
+        background-color: #1e2130;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #30363d;
+        margin-bottom: 15px;
+    }
+
+    .stButton>button {
+        background-color: #00adb5;
+        color: white;
+        border-radius: 6px;
+        border: none;
+    }
+
+    .stButton>button:hover {
+        background-color: #008c93;
+    }
+
+    .stChatMessage {
+        background-color: #262730;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
 # 2. V2.0 – EĞİTİM MODÜLÜ İÇERİKLERİ (STATİK DERS NOTLARI + MINI QUIZ)
 # -----------------------------------------------------------------------------
-
 LESSONS = {
     "Giriş & Tanımlar": {
         "summary": """
-MDR 2017/745, AB'deki tıbbi cihazların piyasaya arzı, piyasada bulundurulması ve kullanımına ilişkin
-temel yasal çerçeveyi tanımlar. Bu modülde MDR kapsamı, cihaz tanımı, aksesuar, ekonomik operatörler
-ve "intended purpose" (amaçlanan kullanım) kavramları ele alınır.
+MDR 2017/745, AB'deki tıbbi cihazların piyasaya arzı, piyasada bulundurulması ve kullanımına ilişkin temel yasal çerçeveyi tanımlar.
+Bu modülde MDR kapsamı, cihaz tanımı, aksesuar, ekonomik operatörler ve "intended purpose" (amaçlanan kullanım) kavramları ele alınır.
 """,
         "sections": [
             {
                 "title": "1. MDR'nin Amacı ve Kapsamı",
                 "body": """
-MDR'nin temel amacı, tıbbi cihazların güvenli ve performanslı olmasını sağlamak, aynı zamanda yenilikçi
-ürünlerin pazara girişini engellemeden yüksek bir hasta güvenliği standardı korumaktır.
+MDR'nin temel amacı, tıbbi cihazların güvenli ve performanslı olmasını sağlamak, aynı zamanda yenilikçi ürünlerin pazara girişini
+engellemeden yüksek bir hasta güvenliği standardı korumaktır.
 
-- MDD'den (93/42/EEC) MDR'ye geçiş ile birlikte klinik kanıt, izlenebilirlik ve post-market gözetim
-  gereklilikleri önemli ölçüde sıkılaştırılmıştır.
+- MDD'den (93/42/EEC) MDR'ye geçiş ile birlikte klinik kanıt, izlenebilirlik ve post-market gözetim gereklilikleri önemli ölçüde sıkılaştırılmıştır.
 - MDR kapsamına giren ürün yelpazesi genişlemiştir (örneğin estetik amaçlı bazı ürünler de dahil edilmiştir).
 """
             },
             {
                 "title": "2. Tıbbi Cihaz Tanımı",
                 "body": """
-Bir tıbbi cihaz, üretici tarafından özel olarak **tıbbi amaçlar** için tasarlanmış ve insan üzerinde kullanılan
-her türlü cihaz, aygıt, yazılım, implant, reaktif vb. ürün olarak tanımlanır.
+Bir tıbbi cihaz, üretici tarafından özel olarak **tıbbi amaçlar** için tasarlanmış ve insan üzerinde kullanılan her türlü cihaz, aygıt,
+yazılım, implant, reaktif vb. ürün olarak tanımlanır.
 
 Ana kriterler:
 - İnsan üzerinde kullanılır.
 - Temel amaç tıbbi bir amaçtır (teşhis, izleme, tedavi, hafifletme vb.).
-- Farmakolojik, immünolojik veya metabolik bir etki **birincil** etki mekanizması değildir,
-  ancak yardımcı rol oynayabilir.
+- Farmakolojik, immünolojik veya metabolik bir etki **birincil** etki mekanizması değildir, ancak yardımcı rol oynayabilir.
 """
             },
             {
                 "title": "3. Aksesuar ve Complementary Products",
                 "body": """
-Aksesuar, tıbbi cihazın kendisi olmamakla birlikte, cihazın **amacına uygun şekilde kullanılmasını**
-mümkün kılan veya destekleyen üründür (örneğin bir cerrahi sistemin özel adaptör aparatı).
+Aksesuar, tıbbi cihazın kendisi olmamakla birlikte, cihazın **amacına uygun şekilde kullanılmasını** mümkün kılan veya destekleyen üründür
+(örneğin bir cerrahi sistemin özel adaptör aparatı).
 
-Complementary product ise genellikle MDR kapsamı dışında kalan, ancak tıbbi cihazla birlikte
-kullanılan (örneğin bazı yazılım veya genel amaçlı enjektörler) ürünler olabilir. Buradaki ayrım,
-regülasyon kapsamını ve sorumlulukları doğrudan etkiler.
+Complementary product ise genellikle MDR kapsamı dışında kalan, ancak tıbbi cihazla birlikte kullanılan (örneğin bazı yazılım veya genel amaçlı
+enjektörler) ürünler olabilir. Buradaki ayrım, regülasyon kapsamını ve sorumlulukları doğrudan etkiler.
 """
             },
             {
@@ -89,16 +104,15 @@ MDR, dört ana ekonomik operatör tanımlar:
 - İthalatçı (Importer)
 - Dağıtıcı (Distributor)
 
-Her birinin ayrı ayrı sorumlulukları vardır; örneğin üretici teknik dosyadan sorumluyken, ithalatçı
-AB pazarına girişte uygunluk beyanı ve etiketleme gibi konularda doğrulama yapmakla yükümlüdür.
+Her birinin ayrı ayrı sorumlulukları vardır; örneğin üretici teknik dosyadan sorumluyken, ithalatçı AB pazarına girişte uygunluk beyanı ve
+etiketleme gibi konularda doğrulama yapmakla yükümlüdür.
 """
             },
             {
                 "title": "5. Intended Purpose (Amaçlanan Kullanım)",
                 "body": """
-Cihazın sınıflandırması, klinik değerlendirme kapsamı ve risk analizi, üreticinin belirlediği
-'intended purpose' üzerine kuruludur. Bu ifade, kullanma talimatı, etiketleme ve pazarlama
-dokümanlarında açıkça belirtilmelidir.
+Cihazın sınıflandırması, klinik değerlendirme kapsamı ve risk analizi, üreticinin belirlediği 'intended purpose' üzerine kuruludur.
+Bu ifade, kullanma talimatı, etiketleme ve pazarlama dokümanlarında açıkça belirtilmelidir.
 
 Eksik veya muğlak bir intended purpose ifadesi:
 - Yanlış risk sınıfı,
@@ -115,7 +129,7 @@ Eksik veya muğlak bir intended purpose ifadesi:
         ],
         "refs": [
             "MDR 2017/745 Madde 2 (Tanımlar)",
-            "MDR 2017/745 Madde 5 (Piyasaya arz ve hizmete sunma koşulları)"
+            "MDR 2017/745 Madde 5 (Piyasaya arz ve hizmete sunma koşulları)",
         ],
         "examples": [
             "Sadece hasta vücut sıcaklığını ölçen dijital termometre → tıbbi cihaz.",
@@ -128,15 +142,15 @@ Eksik veya muğlak bir intended purpose ifadesi:
     },
     "Sınıflandırma": {
         "summary": """
-Bu modülde cihazların risk sınıflandırması (Class I, IIa, IIb, III) ve Annex VIII sınıflandırma kuralları
-temel alınarak, kullanım süresi, vücuda invazivlik ve aktif/aktif olmayan cihaz ayrımı incelenir.
+Bu modülde cihazların risk sınıflandırması (Class I, IIa, IIb, III) ve Annex VIII sınıflandırma kuralları temel alınarak, kullanım süresi,
+vücuda invazivlik ve aktif/aktif olmayan cihaz ayrımı incelenir.
 """,
         "sections": [
             {
                 "title": "1. Sınıflandırmanın Amacı",
                 "body": """
-Sınıflandırma, cihazın hangi uygunluk değerlendirme yoluna (conformity assessment route)
-tabi olacağını belirler. Genel kural: **risk ne kadar yüksekse, denetim o kadar sıkıdır**.
+Sınıflandırma, cihazın hangi uygunluk değerlendirme yoluna (conformity assessment route) tabi olacağını belirler.
+Genel kural: **risk ne kadar yüksekse, denetim o kadar sıkıdır**.
 """
             },
             {
@@ -156,7 +170,9 @@ Annex VIII'e göre sınıflandırma üç ana parametre çevresinde şekillenir:
             {
                 "title": "3. Sınıflandırma Kuralları (Annex VIII)",
                 "body": """
-Annex VIII, kuralları 22 başlık altında toplar. Örneğin:
+Annex VIII, kuralları 22 başlık altında toplar.
+
+Örneğin:
 - Kural 1-4: Non-invaziv cihazlar,
 - Kural 5-8: İnvaziv cihazlar,
 - Kural 9-13: Aktif cihazlar,
@@ -170,8 +186,7 @@ Bazı ürünler tıbbi cihaz mı, yoksa ilaç mı (veya kozmetik mi) sorusu sın
 Bu durumlarda:
 - Etki mekanizması (farmakolojik vs. mekanik),
 - Temel amaç,
-- Ürünün sunumu (presentation to the user)
-kritiktir.
+- Ürünün sunumu (presentation to the user) kritiktir.
 """
             },
         ],
@@ -194,15 +209,15 @@ kritiktir.
     },
     "Teknik Dosya": {
         "summary": """
-Teknik dosya (Technical Documentation), bir cihazın MDR gerekliliklerini karşıladığını
-kanıtlayan ana dosyadır. Annex II ve III, yapıyı ve PMS ile bağlantısını tanımlar.
+Teknik dosya (Technical Documentation), bir cihazın MDR gerekliliklerini karşıladığını kanıtlayan ana dosyadır.
+Annex II ve III, yapıyı ve PMS ile bağlantısını tanımlar.
 """,
         "sections": [
             {
                 "title": "1. Teknik Dosyanın Rolü",
                 "body": """
-Teknik dosya, cihazın güvenlik ve performansına ilişkin tüm kanıtları, tasarım ve üretim
-bilgilerini, risk yönetimi ve klinik değerlendirme çıktıları ile birlikte sunar.
+Teknik dosya, cihazın güvenlik ve performansına ilişkin tüm kanıtları, tasarım ve üretim bilgilerini, risk yönetimi ve klinik değerlendirme
+çıktıları ile birlikte sunar.
 """
             },
             {
@@ -220,9 +235,8 @@ Genel olarak şu başlıklardan oluşur:
             {
                 "title": "3. Annex III – PMS ile İlişki",
                 "body": """
-Annex III, post-market surveillance (PMS) plan ve raporlarının teknik dosya ile
-bağlantısını kurar. PMS Plan, PMCF planı ve raporları da teknik dokümantasyonun bir
-parçası olarak değerlendirilir.
+Annex III, post-market surveillance (PMS) plan ve raporlarının teknik dosya ile bağlantısını kurar.
+PMS Plan, PMCF planı ve raporları da teknik dokümantasyonun bir parçası olarak değerlendirilir.
 """
             },
         ],
@@ -232,7 +246,7 @@ parçası olarak değerlendirilir.
         ],
         "refs": [
             "MDR 2017/745 Annex II (Technical Documentation)",
-            "MDR 2017/745 Annex III (Technical Documentation on PMS)"
+            "MDR 2017/745 Annex III (Technical Documentation on PMS)",
         ],
         "examples": [
             "Design dossier mantığından STED yapısına dönüşen bir dosya formatı.",
@@ -244,15 +258,14 @@ parçası olarak değerlendirilir.
     },
     "Klinik Değerlendirme": {
         "summary": """
-Klinik değerlendirme, cihazın güvenlik ve performansının klinik açıdan kabul edilebilir
-olduğuna dair sistematik ve planlı bir süreçtir. Annex XIV bunun çerçevesini verir.
+Klinik değerlendirme, cihazın güvenlik ve performansının klinik açıdan kabul edilebilir olduğuna dair sistematik ve planlı bir süreçtir.
+Annex XIV bunun çerçevesini verir.
 """,
         "sections": [
             {
                 "title": "1. Klinik Değerlendirme Planı",
                 "body": """
-Plan, literatür taraması, eşdeğer cihaz analizi, klinik veri toplama stratejisi ve
-gerekirse klinik araştırma tasarımını içerir.
+Plan, literatür taraması, eşdeğer cihaz analizi, klinik veri toplama stratejisi ve gerekirse klinik araştırma tasarımını içerir.
 """
             },
             {
@@ -267,9 +280,8 @@ gerekirse klinik araştırma tasarımını içerir.
             {
                 "title": "3. Annex XIV Gereklilikleri",
                 "body": """
-Annex XIV, klinik değerlendirme raporunun yapısı, güncelleme sıklığı ve PMCF ile
-olan bağlantıları tanımlar. Yüksek riskli cihazlarda klinik veriye dayalı güçlü ve
-güncel kanıt beklenir.
+Annex XIV, klinik değerlendirme raporunun yapısı, güncelleme sıklığı ve PMCF ile olan bağlantıları tanımlar.
+Yüksek riskli cihazlarda klinik veriye dayalı güçlü ve güncel kanıt beklenir.
 """
             },
         ],
@@ -290,8 +302,8 @@ güncel kanıt beklenir.
     },
     "Risk Yönetimi": {
         "summary": """
-Risk yönetimi, ISO 14971'e dayanan, tehlikelerin sistematik olarak tanımlandığı,
-değerlendirildiği ve risk kontrol önlemleriyle azaltıldığı dinamik bir süreçtir.
+Risk yönetimi, ISO 14971'e dayanan, tehlikelerin sistematik olarak tanımlandığı, değerlendirildiği ve risk kontrol önlemleriyle azaltıldığı
+dinamik bir süreçtir.
 """,
         "sections": [
             {
@@ -332,7 +344,7 @@ Sadece uyarı ve talimatlara dayalı risk kontrolü, genellikle zayıf kabul edi
         ],
         "refs": [
             "ISO 14971:2019",
-            "MDR 2017/745 Annex I (GSPR – Risk Yönetimi ile bağlantılı hükümler)"
+            "MDR 2017/745 Annex I (GSPR – Risk Yönetimi ile bağlantılı hükümler)",
         ],
         "examples": [
             "İnfusion pompasında 'over-infusion' riski ve buna karşı alarm sistemi.",
@@ -352,10 +364,10 @@ MODULE_QUIZZES = {
                 "Farmakolojik etki ile tedavi etmesi",
                 "İnsan üzerinde kullanılmaması",
                 "Amaçlanan kullanımın tıbbi bir amaç taşıması",
-                "Sadece yazılım olması"
+                "Sadece yazılım olması",
             ],
             "answer": "Amaçlanan kullanımın tıbbi bir amaç taşıması",
-            "explanation": "MDR'ye göre tıbbi cihaz tanımında en kritik unsur intended purpose'dır."
+            "explanation": "MDR'ye göre tıbbi cihaz tanımında en kritik unsur intended purpose'dır.",
         },
         {
             "question": "Aşağıdakilerden hangisi MDR'de ekonomik operatör olarak tanımlanmaz?",
@@ -363,10 +375,10 @@ MODULE_QUIZZES = {
                 "Üretici (Manufacturer)",
                 "Yetkili Temsilci (Authorised Representative)",
                 "İthalatçı (Importer)",
-                "Hastane Yönetimi"
+                "Hastane Yönetimi",
             ],
             "answer": "Hastane Yönetimi",
-            "explanation": "Hastaneler MDR'de ekonomik operatör olarak sayılmaz; kullanıcı kuruluştur."
+            "explanation": "Hastaneler MDR'de ekonomik operatör olarak sayılmaz; kullanıcı kuruluştur.",
         },
         {
             "question": "Aksesuar ile ilgili hangi ifade doğrudur?",
@@ -374,29 +386,24 @@ MODULE_QUIZZES = {
                 "Aksesuarlar MDR kapsamına girmez.",
                 "Aksesuarlar ilaç gibi değerlendirilir.",
                 "Aksesuarlar kendi başına tıbbi amaç taşımaz ama cihazın amacına uygun kullanımını sağlar.",
-                "Aksesuarlar yalnızca yazılım olabilir."
+                "Aksesuarlar yalnızca yazılım olabilir.",
             ],
             "answer": "Aksesuarlar kendi başına tıbbi amaç taşımaz ama cihazın amacına uygun kullanımını sağlar.",
-            "explanation": "Aksesuar, tıbbi cihazın kullanımını mümkün kılan veya destekleyen üründür ve MDR kapsamındadır."
+            "explanation": "Aksesuar, tıbbi cihazın kullanımını mümkün kılan veya destekleyen üründür ve MDR kapsamındadır.",
         },
     ],
     "Sınıflandırma": [
         {
             "question": "Sınıflandırma için temel referans doküman hangisidir?",
-            "options": [
-                "Annex II",
-                "Annex III",
-                "Annex VIII",
-                "Annex XIV"
-            ],
+            "options": ["Annex II", "Annex III", "Annex VIII", "Annex XIV"],
             "answer": "Annex VIII",
-            "explanation": "Annex VIII, MDR kapsamında sınıflandırma kurallarını tanımlar."
+            "explanation": "Annex VIII, MDR kapsamında sınıflandırma kurallarını tanımlar.",
         },
         {
             "question": "Genellikle en yüksek risk seviyesine sahip sınıf hangisidir?",
             "options": ["Class I", "Class IIa", "Class IIb", "Class III"],
             "answer": "Class III",
-            "explanation": "Class III cihazlar en yüksek riskli cihazlardır (örneğin kalp pili, stent vb.)."
+            "explanation": "Class III cihazlar en yüksek riskli cihazlardır (örneğin kalp pili, stent vb.).",
         },
         {
             "question": "Aşağıdakilerden hangisi sınıflandırmada dikkate alınan parametrelerden BİRİ DEĞİLDİR?",
@@ -404,10 +411,10 @@ MODULE_QUIZZES = {
                 "Kullanım süresi",
                 "Vücuda invazivlik durumu",
                 "Cihazın rengi",
-                "Aktif/aktif olmayan cihaz ayrımı"
+                "Aktif/aktif olmayan cihaz ayrımı",
             ],
             "answer": "Cihazın rengi",
-            "explanation": "Renk sınıflandırma için bir kriter değildir; kullanım süresi, invazivlik ve aktiflik önemlidir."
+            "explanation": "Renk sınıflandırma için bir kriter değildir; kullanım süresi, invazivlik ve aktiflik önemlidir.",
         },
     ],
     "Teknik Dosya": [
@@ -417,22 +424,22 @@ MODULE_QUIZZES = {
                 "Sadece pazarlama materyallerini saklamak",
                 "Cihazın MDR gerekliliklerini karşıladığını kanıtlamak",
                 "Sadece test raporlarını arşivlemek",
-                "Sadece üretim talimatlarını içermek"
+                "Sadece üretim talimatlarını içermek",
             ],
             "answer": "Cihazın MDR gerekliliklerini karşıladığını kanıtlamak",
-            "explanation": "Teknik dosya, cihazın güvenli ve performanslı olduğunu gösteren tüm kanıtları içerir."
+            "explanation": "Teknik dosya, cihazın güvenli ve performanslı olduğunu gösteren tüm kanıtları içerir.",
         },
         {
             "question": "Teknik dosyanın yapısını tarif eden ek hangisidir?",
             "options": ["Annex I", "Annex II", "Annex VIII", "Annex XIV"],
             "answer": "Annex II",
-            "explanation": "Annex II, teknik dokümantasyonun içerik başlıklarını tanımlar."
+            "explanation": "Annex II, teknik dokümantasyonun içerik başlıklarını tanımlar.",
         },
         {
             "question": "PMS ile teknik dosya bağlantısını hangi ek tanımlar?",
             "options": ["Annex III", "Annex V", "Annex VII", "Annex IX"],
             "answer": "Annex III",
-            "explanation": "Annex III, PMS ile ilişkili teknik dokümantasyon gerekliliklerini açıklar."
+            "explanation": "Annex III, PMS ile ilişkili teknik dokümantasyon gerekliliklerini açıklar.",
         },
     ],
     "Klinik Değerlendirme": [
@@ -442,10 +449,10 @@ MODULE_QUIZZES = {
                 "Sadece pazarda rekabet analizi yapmak",
                 "Cihazın klinik güvenlik ve performansını göstermek",
                 "Sadece literatür taraması yapmak",
-                "Cihazın maliyetini hesaplamak"
+                "Cihazın maliyetini hesaplamak",
             ],
             "answer": "Cihazın klinik güvenlik ve performansını göstermek",
-            "explanation": "Klinik değerlendirme, cihazın beklenen klinik fayda ve risk profilini kanıtlar."
+            "explanation": "Klinik değerlendirme, cihazın beklenen klinik fayda ve risk profilini kanıtlar.",
         },
         {
             "question": "Klinik veri kaynağı olarak AŞAĞIDAKİLERDEN hangisi kullanılamaz?",
@@ -453,29 +460,24 @@ MODULE_QUIZZES = {
                 "Yayınlanmış literatür",
                 "Klinik çalışmalar",
                 "PMS/PMCF çıktıları",
-                "Rastgele sosyal medya yorumları"
+                "Rastgele sosyal medya yorumları",
             ],
             "answer": "Rastgele sosyal medya yorumları",
-            "explanation": "Klinik veri, sistematik ve doğrulanabilir kaynaklara dayanmalıdır."
+            "explanation": "Klinik veri, sistematik ve doğrulanabilir kaynaklara dayanmalıdır.",
         },
         {
             "question": "Klinik değerlendirme ve klinik araştırmaları tanımlayan ek hangisidir?",
             "options": ["Annex I", "Annex II", "Annex VIII", "Annex XIV"],
             "answer": "Annex XIV",
-            "explanation": "Annex XIV, klinik değerlendirme ve klinik araştırmalara ilişkin gereklilikleri içerir."
+            "explanation": "Annex XIV, klinik değerlendirme ve klinik araştırmalara ilişkin gereklilikleri içerir.",
         },
     ],
     "Risk Yönetimi": [
         {
             "question": "Risk yönetimi için temel referans standart hangisidir?",
-            "options": [
-                "ISO 13485",
-                "ISO 14971",
-                "ISO 9001",
-                "EN 62366"
-            ],
+            "options": ["ISO 13485", "ISO 14971", "ISO 9001", "EN 62366"],
             "answer": "ISO 14971",
-            "explanation": "ISO 14971 tıbbi cihazlar için risk yönetimi standardıdır."
+            "explanation": "ISO 14971 tıbbi cihazlar için risk yönetimi standardıdır.",
         },
         {
             "question": "Aşağıdakilerden hangisi risk kontrol hiyerarşisinde en üstte yer alır?",
@@ -483,10 +485,10 @@ MODULE_QUIZZES = {
                 "Kullanıcıya uyarı eklemek",
                 "Tasarımla riskin azaltılması",
                 "Kullanma talimatı yazmak",
-                "Etiketlemeye dikkat çekici semboller eklemek"
+                "Etiketlemeye dikkat çekici semboller eklemek",
             ],
             "answer": "Tasarımla riskin azaltılması",
-            "explanation": "Risk kontrolünde öncelik, tasarım yoluyla risk azaltmadır."
+            "explanation": "Risk kontrolünde öncelik, tasarım yoluyla risk azaltmadır.",
         },
         {
             "question": "Hazard → Sequence → Hazardous situation → Harm zinciri neyi temsil eder?",
@@ -494,10 +496,10 @@ MODULE_QUIZZES = {
                 "Kalite yönetim süreçlerini",
                 "Klinik araştırma fazlarını",
                 "Risk senaryosu modellemesini",
-                "PMS raporlama basamaklarını"
+                "PMS raporlama basamaklarını",
             ],
             "answer": "Risk senaryosu modellemesini",
-            "explanation": "Bu zincir, tehlikenin zarar ile sonuçlanmasına giden olaylar zincirinin modellenmesidir."
+            "explanation": "Bu zincir, tehlikenin zarar ile sonuçlanmasına giden olaylar zincirinin modellenmesidir.",
         },
     ],
 }
@@ -505,34 +507,29 @@ MODULE_QUIZZES = {
 # V5.0 – Denetim Senaryoları
 AUDIT_SCENARIOS = {
     "Class I – Basit Non-invaziv Cihaz Denetimi": """
-Class I, non-steril, ölçüm fonksiyonu olmayan, non-invaziv bir cihazın MDR kapsamında
-genel denetimi. Odak: temel GSPR uyumu, teknik dosya içeriği, etiketleme, UDI ve PMS yapısı.
+Class I, non-steril, ölçüm fonksiyonu olmayan, non-invaziv bir cihazın MDR kapsamında genel denetimi.
+Odak: temel GSPR uyumu, teknik dosya içeriği, etiketleme, UDI ve PMS yapısı.
 """,
     "Implantable Class IIb – Ortopedik Cihaz Denetimi": """
 Implantable Class IIb (örneğin ortopedik plak/vida) bir cihaz için denetim.
-Odak: risk yönetimi, klinik değerlendirme derinliği, PMCF gerekliliği, sterilite ve
-üretim proses validasyonu.
+Odak: risk yönetimi, klinik değerlendirme derinliği, PMCF gerekliliği, sterilite ve üretim proses validasyonu.
 """,
     "Software as Medical Device (SaMD) Denetimi": """
-Yalnızca yazılım olarak tıbbi cihaz (SaMD) denetimi. Odak: intended purpose,
-risk sınıflandırması, yazılım yaşam döngüsü, siber güvenlik, klinik değerlendirme ve
-post-market gözetim.
+Yalnızca yazılım olarak tıbbi cihaz (SaMD) denetimi.
+Odak: intended purpose, risk sınıflandırması, yazılım yaşam döngüsü, siber güvenlik, klinik değerlendirme ve post-market gözetim.
 """,
     "Class III – EC Sertifika Yenileme Denetimi": """
-Class III implantable bir cihaz için EC sertifika yenileme (surveillance / renewal)
-denetimi. Odak: PMS/PMCF çıktılarının teknik dosyaya geri beslenmesi, ciddi olay raporlamaları,
-kalan riskin kabul edilebilirliği ve klinik kanıtların güncelliği.
-"""
+Class III implantable bir cihaz için EC sertifika yenileme (surveillance / renewal) denetimi.
+Odak: PMS/PMCF çıktılarının teknik dosyaya geri beslenmesi, ciddi olay raporlamaları, kalan riskin kabul edilebilirliği ve klinik kanıtların güncelliği.
+""",
 }
 
 # -----------------------------------------------------------------------------
-# 3. YARDIMCI FONKSİYONLAR
+# 3. YARDIMCI FONKSİYONLAR + DEBUG İÇİN EKLER
 # -----------------------------------------------------------------------------
 
 def get_active_api_key_value():
-    """
-    Önce session_state.api_key, yoksa st.secrets içindeki GOOGLE_API_KEY.
-    """
+    """Önce session_state.api_key, yoksa st.secrets içindeki GOOGLE_API_KEY."""
     if "api_key" in st.session_state and st.session_state.api_key:
         return st.session_state.api_key
     try:
@@ -542,13 +539,11 @@ def get_active_api_key_value():
         pass
     return None
 
+
 def get_working_model(api_key: str):
-    """
-    Mevcut ve çalışan bir Gemini modelini seçer.
-    """
+    """Mevcut ve çalışan bir Gemini modelini seçer."""
     if not api_key:
         raise ValueError("Google API anahtarı gerekli.")
-
     api_key = api_key.strip()
     genai.configure(api_key=api_key, transport="rest")
 
@@ -560,7 +555,6 @@ def get_working_model(api_key: str):
         "gemini-2.5-pro",
         "gemini-2.0-flash",
     ]
-
     for model_name in models_to_try:
         try:
             model = genai.GenerativeModel(model_name)
@@ -569,7 +563,9 @@ def get_working_model(api_key: str):
         except Exception:
             continue
 
+    # Hiçbiri çalışmazsa ilkini dene (muhtemelen yine hata verecek ama en azından kontrol bizde)
     return genai.GenerativeModel(models_to_try[0])
+
 
 def handle_api_error(e: Exception):
     msg = str(e)
@@ -582,6 +578,9 @@ def handle_api_error(e: Exception):
         )
     else:
         st.error(f"Beklenmeyen bir hata oluştu:\n\n{msg}")
+        # DEBUG
+        st.write("DEBUG - API hata detayı:", repr(msg))
+
 
 @st.cache_resource
 def load_all_pdfs(folder_path="dokumanlar"):
@@ -590,7 +589,7 @@ def load_all_pdfs(folder_path="dokumanlar"):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
         return "", []
-    files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
+    files = [f for f in os.listdir(folder_path) if f.endswith(".pdf")]
     for filename in files:
         file_path = os.path.join(folder_path, filename)
         try:
@@ -600,19 +599,35 @@ def load_all_pdfs(folder_path="dokumanlar"):
                 if t:
                     full_text += t + "\n"
             file_list.append(filename)
-        except:
+        except Exception as e:
+            # DEBUG
+            st.write(f"DEBUG - PDF okuma hatası ({filename}): {e}")
             pass
     return full_text, file_list
+
 
 def detect_context_focus(context_text: str):
     if not context_text:
         return None
     keywords = [
-        "gspr", "annex i", "annex ii", "annex iii", "annex viii", "annex xiv",
-        "iso 14971", "iso 13485", "pms", "pmcf",
-        "risk", "risk management", "sınıflandırma", "classification",
-        "technical documentation", "teknik dosya",
-        "clinical evaluation", "klinik değerlendirme"
+        "gspr",
+        "annex i",
+        "annex ii",
+        "annex iii",
+        "annex viii",
+        "annex xiv",
+        "iso 14971",
+        "iso 13485",
+        "pms",
+        "pmcf",
+        "risk",
+        "risk management",
+        "sınıflandırma",
+        "classification",
+        "technical documentation",
+        "teknik dosya",
+        "clinical evaluation",
+        "klinik değerlendirme",
     ]
     text_lower = context_text.lower()
     best_kw = None
@@ -624,12 +639,59 @@ def detect_context_focus(context_text: str):
             best_kw = kw
     return best_kw
 
+
+# --------------------------
+# CEVAP KARŞILAŞTIRMA DEBUG FONKSİYONLARI
+# --------------------------
+
+def normalize_answer(s):
+    """Karşılaştırma öncesi cevapları normalize et (boşluk / büyük-küçük harf vb.)."""
+    if s is None:
+        return ""
+    return str(s).strip().lower()
+
+
+def is_answer_correct(user_answer, correct_answer, options):
+    """
+    Çoktan seçmeli / Doğru-Yanlış cevap doğruluğunu daha esnek kontrol eder.
+    - Metin bazlı normalize karşılaştırma
+    - 'A/B/C/D' gibi harf dönen modeller için indeks eşleştirme
+    - Doğru cevabın seçeneklerden biriyle kısmi eşleşmesi durumu
+    """
+    nu = normalize_answer(user_answer)
+    nc = normalize_answer(correct_answer)
+
+    if not options:
+        return nu == nc
+
+    if nu == nc:
+        return True
+
+    # Model "C" gibi sadece şık harfi döndürürse:
+    letters = ["a", "b", "c", "d", "e", "f"]
+    if nc in letters:
+        idx = letters.index(nc)
+        if 0 <= idx < len(options):
+            if normalize_answer(options[idx]) == nu:
+                return True
+
+    # Kısmi eşleşme: doğru cevap metni seçeneklerden birinin içinde / tam tersi
+    for opt in options:
+        no = normalize_answer(opt)
+        if nc and (nc in no or no in nc):
+            if no == nu:
+                return True
+
+    return False
+
+
 def generate_ai_question(api_key, context_text, difficulty="Orta", qtype="Çoktan Seçmeli"):
     try:
         model = get_working_model(api_key)
+
         if len(context_text) > 5000:
             start = random.randint(0, len(context_text) - 4000)
-            partial_context = context_text[start : start + 4000]
+            partial_context = context_text[start: start + 4000]
         else:
             partial_context = context_text
 
@@ -639,7 +701,7 @@ def generate_ai_question(api_key, context_text, difficulty="Orta", qtype="Çokta
         diff_map = {
             "Temel": "temel seviye, kavram tanımları ve kolay örnekler içeren",
             "Orta": "orta seviye, kavramlar arası ilişki ve basit yorum içeren",
-            "İleri": "ileri seviye, denetçi bakışı ve karmaşık senaryolar içeren"
+            "İleri": "ileri seviye, denetçi bakışı ve karmaşık senaryolar içeren",
         }
         diff_desc = diff_map.get(difficulty, "orta seviye")
 
@@ -664,6 +726,7 @@ BAĞLAM:
 {partial_context}
 
 {focus_text}
+
 Soru tipi: {qtype} ({type_hint})
 
 Lütfen SADECE aşağıdaki JSON formatında cevap ver:
@@ -688,8 +751,10 @@ NOTLAR:
         if "tur" not in data:
             data["tur"] = "coktan_secme"
         return data
-    except Exception:
+    except Exception as e:
+        st.write("DEBUG - generate_ai_question hata:", e)
         return None
+
 
 def grade_open_answer(api_key, question_dict, user_answer, difficulty="Orta"):
     try:
@@ -698,9 +763,7 @@ def grade_open_answer(api_key, question_dict, user_answer, difficulty="Orta"):
         soru = question_dict.get("soru", "")
         prompt = f"""
 Sen MDR 2017/745 kapsamında deneyimli bir denetçisin.
-Aşağıdaki soru ve ideal cevaba göre kullanıcının cevabını değerlendir.
-
-Zorluk seviyesi: {difficulty}
+Aşağıdaki soru ve ideal cevaba göre kullanıcının cevabını değerlendir. Zorluk seviyesi: {difficulty}
 
 Soru:
 {soru}
@@ -724,8 +787,10 @@ Lütfen 0-100 arasında bir puan ver ve SADECE aşağıdaki JSON formatında cev
         clean = res.replace("```json", "").replace("```", "").strip()
         data = json.loads(clean)
         return data
-    except Exception:
+    except Exception as e:
+        st.write("DEBUG - grade_open_answer hata:", e)
         return None
+
 
 def build_assistant_prompt(mode: str, ctx: str, user_message: str, focus: str | None):
     base_format = """
@@ -742,34 +807,29 @@ Kaynaklar:
 - İlgili MDR maddelerini ve eklerini maddeler hâlinde yaz (örneğin: "MDR 2017/745 Madde 2", "Annex II", "Annex VIII").
 - İlgili ISO standartları varsa belirt (örneğin: "ISO 14971:2019", "ISO 13485:2016").
 """
-
     focus_text = f"Bağlamda baskın konu: {focus}. Bu alanı cevabında özellikle vurgula.\n" if focus else ""
 
     if mode == "Eğitmen Modu":
         role_text = """
 Rolün: MDR 2017/745 ve ilgili ISO standartları konusunda deneyimli bir EĞİTMEN'sin.
-Amacın: Kullanıcının kavramı gerçekten anlamasını sağlamak, örneklerle anlatmak
-ve yanlış anlaşılmaları gidermek.
+Amacın: Kullanıcının kavramı gerçekten anlamasını sağlamak, örneklerle anlatmak ve yanlış anlaşılmaları gidermek.
 """
     elif mode == "Denetçi Modu":
         role_text = """
 Rolün: Notified Body denetçisi gibi davranan katı bir DENETÇİ'sin.
-Amacın: Kullanıcının yaklaşımındaki eksikleri, riskleri ve uyumsuzlukları dürüstçe
-ve doğrudan ortaya koymak; gerektiğinde ek sorular sorarak onu zorlamak.
+Amacın: Kullanıcının yaklaşımındaki eksikleri, riskleri ve uyumsuzlukları dürüstçe ve doğrudan ortaya koymak; gerektiğinde ek sorular sorarak onu zorlamak.
 """
     elif mode == "Teknik Dosya Modu":
         role_text = """
 Rolün: Annex II ve Annex III'e hâkim, tecrübeli bir TEKNİK DOSYA UZMANI'sın.
-Amacın: Kullanıcıya teknik dosya (Annex II) ve PMS dokümantasyonu (Annex III)
-hazırlama, yapılandırma ve içerik kurgusu konusunda net yol göstermek.
+Amacın: Kullanıcıya teknik dosya (Annex II) ve PMS dokümantasyonu (Annex III) hazırlama, yapılandırma ve içerik kurgusu konusunda net yol göstermek.
 Özellikle izlenebilirlik (traceability) ve GSPR kapsamasına vurgu yap.
 """
     elif mode == "Risk Analizi Modu":
         role_text = """
 Rolün: ISO 14971 ve MDR risk yönetimi hükümlerine hâkim bir RİSK YÖNETİMİ UZMANI'sın.
-Amacın: Hazard → Sequence of Events → Hazardous Situation → Harm zincirini
-kullanarak kullanıcıya sağlam risk senaryoları kurdurmak, risk kontrol hiyerarşisine
-uygun önlemler önermek ve kalan risk değerlendirmesi hakkında rehberlik etmek.
+Amacın: Hazard → Sequence of Events → Hazardous Situation → Harm zincirini kullanarak kullanıcıya sağlam risk senaryoları kurdurmak,
+risk kontrol hiyerarşisine uygun önlemler önermek ve kalan risk değerlendirmesi hakkında rehberlik etmek.
 """
     else:
         role_text = """
@@ -783,6 +843,7 @@ Amacın: Kullanıcının sorusuna mümkün olan en net ve regülasyona dayalı c
 {base_format}
 
 {focus_text}
+
 EĞİTİM BAĞLAMI (MDR/ISO dokümanları ve ders notları):
 {ctx}
 
@@ -790,6 +851,7 @@ KULLANICININ SORUSU / TALEBİ:
 {user_message}
 """
     return prompt
+
 
 def start_audit_session(api_key: str, scenario_key: str, context_text: str):
     model = get_working_model(api_key)
@@ -805,8 +867,7 @@ Elinde cihazın teknik dosyası ve kalite sistemi kayıtları var (Annex II, Ann
 Şimdi kullanıcı ile sözlü bir denetim yapıyorsun.
 
 Bu senaryo için:
-- Kullanıcının hem MDR hem de ilgili ISO standartlarını (özellikle ISO 13485 ve ISO 14971) ne kadar bildiğini
-ölçecek şekilde TEK bir zorlayıcı soru sor.
+- Kullanıcının hem MDR hem de ilgili ISO standartlarını (özellikle ISO 13485 ve ISO 14971) ne kadar bildiğini ölçecek şekilde TEK bir zorlayıcı soru sor.
 - Soru, açık uçlu olsun (kullanıcıdan açıklama bekle).
 - Tercihen GSPR, risk yönetimi, klinik değerlendirme veya PMS/PMCF ile bağlantı kur.
 
@@ -814,6 +875,7 @@ Sadece soruyu yaz, başka hiçbir açıklama yazma.
 """
     res = model.generate_content(prompt).text
     return res.strip(), scenario_desc
+
 
 def evaluate_audit_answer(api_key: str, scenario_desc: str, question: str, answer: str):
     model = get_working_model(api_key)
@@ -832,12 +894,10 @@ Kullanıcının cevabı:
 Bu cevabı değerlendir:
 - 0 ile 5 arasında bir puan ver (5: mükemmel, 0: tamamen yanlış).
 - Cevabın güçlü ve zayıf yönlerini açıklayan kısa ama net bir değerlendirme yap.
-- MDR veya ISO 13485/14971 açısından eksik, yanlış veya riskli gördüğün her noktayı
-  non-conformity (NC) şeklinde listele. Örnek:
-  "NC1: Annex II teknik dokümantasyonda GSPR izlenebilirliği gösterilmemiş."
+- MDR veya ISO 13485/14971 açısından eksik, yanlış veya riskli gördüğün her noktayı non-conformity (NC) şeklinde listele.
+  Örnek: "NC1: Annex II teknik dokümantasyonda GSPR izlenebilirliği gösterilmemiş."
 - Aynı senaryo için bir sonraki zorlayıcı soruyu üret.
-- Eğer bu oturum için artık ek soru sormaya gerek yoksa 'tamamlandi_mi' alanını true yap
-  ve 'sonraki_soru' alanını boş string bırak.
+- Eğer bu oturum için artık ek soru sormaya gerek yoksa 'tamamlandi_mi' alanını true yap ve 'sonraki_soru' alanını boş string bırak.
 
 Sadece aşağıdaki JSON formatında cevap ver:
 
@@ -853,13 +913,14 @@ Sadece aşağıdaki JSON formatında cevap ver:
     clean = res.replace("```json", "").replace("```", "").strip()
     try:
         data = json.loads(clean)
-    except Exception:
+    except Exception as e:
+        st.write("DEBUG - evaluate_audit_answer JSON parse hatası:", e, "RAW:", clean)
         data = {
             "puan": 0,
             "degerlendirme": "Değerlendirme sırasında JSON parse hatası oluştu. Lütfen tekrar deneyin.",
             "nc_listesi": [],
             "sonraki_soru": "",
-            "tamamlandi_mi": True
+            "tamamlandi_mi": True,
         }
     data.setdefault("puan", 0)
     data.setdefault("degerlendirme", "")
@@ -867,6 +928,7 @@ Sadece aşağıdaki JSON formatında cevap ver:
     data.setdefault("sonraki_soru", "")
     data.setdefault("tamamlandi_mi", False)
     return data
+
 
 # --- V6.0: Otomatik GSPR Matrisi üretimi ---
 def generate_gspr_matrix(api_key: str, device_name: str, device_desc: str, context_text: str):
@@ -876,8 +938,7 @@ def generate_gspr_matrix(api_key: str, device_name: str, device_desc: str, conte
 Sen MDR 2017/745 Annex I (GSPR) konusunda uzman bir regülasyon danışmanısın.
 
 Cihaz adı: {device_name}
-Cihaz tanımı / intended purpose özeti:
-{device_desc}
+Cihaz tanımı / intended purpose özeti: {device_desc}
 
 Bağlam (MDR/ISO dokümanları, ders notları vb.):
 {ctx}
@@ -906,6 +967,7 @@ Lütfen SADECE şu formatta JSON ver:
     data = json.loads(clean)
     return data
 
+
 # --- V6.0: Otomatik Risk Analizi Tablosu üretimi ---
 def generate_risk_table(api_key: str, device_name: str, device_desc: str, context_text: str):
     model = get_working_model(api_key)
@@ -914,8 +976,7 @@ def generate_risk_table(api_key: str, device_name: str, device_desc: str, contex
 Sen ISO 14971:2019 ve MDR Annex I risk yönetimi hükümlerine çok hâkim bir risk uzmanısın.
 
 Cihaz adı: {device_name}
-Cihaz tanımı / intended purpose özeti:
-{device_desc}
+Cihaz tanımı / intended purpose özeti: {device_desc}
 
 Bağlam (MDR/ISO dokümanları, ders notları vb.):
 {ctx}
@@ -947,6 +1008,7 @@ Lütfen SADECE şu formatta JSON ver:
     clean = res.replace("```json", "").replace("```", "").strip()
     data = json.loads(clean)
     return data
+
 
 # --- V7.0: GSPR ↔ Risk İzlenebilirlik Matrisi ---
 def generate_traceability_matrix(api_key: str, gspr_rows, risk_rows):
@@ -987,15 +1049,14 @@ Notlar:
     data = json.loads(clean)
     return data
 
+
 # --- V8.0: Denetim Checklisti & Test Planı Üretimi ---
 def generate_checklist_and_testplan(api_key: str, device_name: str, gspr_rows, risk_rows, trace_matrix):
-    """
-    İzlenebilirlik verisini kullanarak denetim checklisti ve test planı üretir.
-    """
+    """İzlenebilirlik verisini kullanarak denetim checklisti ve test planı üretir."""
     model = get_working_model(api_key)
     prompt = f"""
-Sen MDR 2017/745, Annex I (GSPR), Annex II/III (Teknik Doküman) ve ISO 14971/13485 konularında
-çok tecrübeli bir Notified Body denetçisi ve test planlayıcısın.
+Sen MDR 2017/745, Annex I (GSPR), Annex II/III (Teknik Doküman) ve ISO 14971/13485 konularında çok tecrübeli bir
+Notified Body denetçisi ve test planlayıcısın.
 
 Cihaz adı: {device_name}
 
@@ -1011,15 +1072,15 @@ TRACE_MATRIX (Risk -> GSPR eşleşmeleri):
 {json.dumps(trace_matrix, ensure_ascii=False)}
 
 Görev:
+
 1) Bu verilere dayanarak, denetim sırasında kullanılabilecek bir "Denetim Checklisti" üret.
    - Her madde belirli bir GSPR ve/veya risk senaryosuna referans versin.
-   - Her madde için neyin kontrol edileceğini ve kanıt olarak hangi kayıt/dokümanların
-     talep edilmesi gerektiğini yaz.
+   - Her madde için neyin kontrol edileceğini ve kanıt olarak hangi kayıt/dokümanların talep edilmesi gerektiğini yaz.
    - Tip alanında "Dokümantasyon", "Kayıt", "Saha Gözlemi", "Test" gibi değerler kullan.
 
 2) Aynı veriye dayanarak, cihaz için özet bir "Test Planı" üret.
-   - Her test için test_adi, amaç, ilişkili GSPR numaraları, ilişkili risk indexleri,
-     test_tipi (Fonksiyonel, Güvenlik, Kullanılabilirlik, Klinik vb.) ve öncelik (Yüksek/Orta/Düşük) belirt.
+   - Her test için test_adi, amaç, ilişkili GSPR numaraları, ilişkili risk indexleri, test_tipi (Fonksiyonel, Güvenlik, Kullanılabilirlik, Klinik vb.)
+     ve öncelik (Yüksek/Orta/Düşük) belirt.
 
 Lütfen SADECE aşağıdaki JSON formatında cevap ver:
 
@@ -1028,7 +1089,7 @@ Lütfen SADECE aşağıdaki JSON formatında cevap ver:
     {{
       "madde": "Kontrol edilecek madde açıklaması",
       "kaynak": "Örneğin: GSPR 9.2, Risk #3",
-      "tip": "Dokümantasyon" 
+      "tip": "Dokümantasyon"
     }}
   ],
   "test_plan": [
@@ -1053,13 +1114,13 @@ Notlar:
     data = json.loads(clean)
     return data
 
+
 # --- Yeni: Stok ürünü için sınıflandırma + istasyon talimatları ---
 def classify_and_build_work_instructions(api_key: str, device_name: str, device_desc: str, context_text: str):
     """
     Bir ürün için:
     - MDR sınıfı tahmini (Class I / IIa / IIb / III + gerekçe)
-    - Her istasyon için kullanım kılavuzu (operatör talimatı)
-    üretir.
+    - Her istasyon için kullanım kılavuzu (operatör talimatı) üretir.
     """
     model = get_working_model(api_key)
     ctx = context_text[:4000] if context_text else ""
@@ -1067,8 +1128,7 @@ def classify_and_build_work_instructions(api_key: str, device_name: str, device_
 Sen MDR 2017/745 sınıflandırma (Annex VIII) ve tıbbi cihaz üretim prosesleri konusunda uzman bir danışmansın.
 
 Cihaz/Ürün adı: {device_name}
-Ürün tanımı / intended purpose:
-{device_desc}
+Ürün tanımı / intended purpose: {device_desc}
 
 Üretim istasyonları:
 1. Sayım
@@ -1084,13 +1144,15 @@ Bağlam (MDR/ISO metinleri, teknik dokümanlar, ders notları):
 {ctx}
 
 Görevlerin:
-1) Bu ürünün MDR kapsamındaki OLASI risk sınıfını (Class I, Class IIa, Class IIb veya Class III) tahmini olarak değerlendir
-   ve kısa gerekçe yaz. (Steril / non-steril, ölçüm fonksiyonlu, reusable vb. özellikleri de yorumlayabilirsin.)
-2) Yukarıdaki HER bir istasyon için, üretim operatörüne yönelik kısa ama profesyonel bir "istasyon kullanım kılavuzu"
-   hazırla:
+
+1) Bu ürünün MDR kapsamındaki OLASI risk sınıfını (Class I, Class IIa, Class IIb veya Class III) tahmini olarak değerlendir ve kısa gerekçe yaz.
+   (Steril / non-steril, ölçüm fonksiyonlu, reusable vb. özellikleri de yorumlayabilirsin.)
+
+2) Yukarıdaki HER bir istasyon için, üretim operatörüne yönelik kısa ama profesyonel bir "istasyon kullanım kılavuzu" hazırla:
    - İstasyonun amacı,
    - 5–10 maddelik kritik adımlar / dikkat edilmesi gereken noktalar,
    - Tutulması gereken kayıt/doküman türleri (örn. lot no, proses parametreleri, operatör imzası).
+
 3) MDR ve ilgili ISO (özellikle ISO 13485 ve ISO 14971) gerekliliklerine uygun bir dil kullan.
 
 SADECE aşağıdaki JSON formatında cevap ver:
@@ -1144,8 +1206,8 @@ SADECE aşağıdaki JSON formatında cevap ver:
 }}
 
 NOTLAR:
-- İstasyon anahtarları MUTLAKA şu isimler olsun: "sayim", "kumlama", "polisaj", "lazer_markalama",
-  "altin_kaplama", "yikama", "paketleme", "kalite_kontrol".
+- İstasyon anahtarları MUTLAKA şu isimler olsun: "sayim", "kumlama", "polisaj", "lazer_markalama", "altin_kaplama",
+  "yikama", "paketleme", "kalite_kontrol".
 - Tüm metinler Türkçe olsun.
 - Sınıf tahmini eğitim amaçlıdır; gerçek regülatuvar karara eşdeğer olmadığı belirtilmiş kabul edilebilir.
 """
@@ -1153,6 +1215,7 @@ NOTLAR:
     clean = res.replace("```json", "").replace("```", "").strip()
     data = json.loads(clean)
     return data
+
 
 # -----------------------------------------------------------------------------
 # 4. SIDEBAR (v8.0 – API KAYIT SİSTEMİ + DOKÜMAN DURUMU)
@@ -1181,7 +1244,7 @@ with st.sidebar:
     api_mode = st.radio(
         "API Anahtarı Kaynağı",
         ["Kayıtlı Anahtarı Kullan", "Yeni Anahtar Gir"],
-        index=default_index
+        index=default_index,
     )
 
     if api_mode == "Kayıtlı Anahtarı Kullan":
@@ -1227,18 +1290,23 @@ api_key = get_active_api_key_value()
 # -----------------------------------------------------------------------------
 # 5. ANA EKRAN
 # -----------------------------------------------------------------------------
-st.markdown('<div class="header-box"><h1>🏥 MDR Uzmanlık Akademisi v8.0</h1></div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="header-box"><h1>🏥 MDR Uzmanlık Akademisi v8.0</h1></div>',
+    unsafe_allow_html=True,
+)
 
-tab_egitim, tab_quiz, tab_asistan, tab_auditor, tab_docgen, tab_trace, tab_plan, tab_stock = st.tabs([
-    "📚 Eğitim", 
-    "🧠 Soru Bankası", 
-    "🤖 MDR Asistanı", 
-    "🎭 Sanal Denetçi", 
-    "📝 Doküman Fabrikası",
-    "🔗 İzlenebilirlik",
-    "📋 Checklist & Test Plan",
-    "🏭 Stok & Proses Analizi"
-])
+tab_egitim, tab_quiz, tab_asistan, tab_auditor, tab_docgen, tab_trace, tab_plan, tab_stock = st.tabs(
+    [
+        "📚 Eğitim",
+        "🧠 Soru Bankası",
+        "🤖 MDR Asistanı",
+        "🎭 Sanal Denetçi",
+        "📝 Doküman Fabrikası",
+        "🔗 İzlenebilirlik",
+        "📋 Checklist & Test Plan",
+        "🏭 Stok & Proses Analizi",
+    ]
+)
 
 # --- TAB 1: EĞİTİM ---
 with tab_egitim:
@@ -1246,24 +1314,23 @@ with tab_egitim:
     with col1:
         modul = st.radio(
             "Modül:",
-            ["Giriş & Tanımlar", "Sınıflandırma", "Teknik Dosya", "Klinik Değerlendirme", "Risk Yönetimi"]
+            ["Giriş & Tanımlar", "Sınıflandırma", "Teknik Dosya", "Klinik Değerlendirme", "Risk Yönetimi"],
         )
     with col2:
         lesson = LESSONS[modul]
         st.info(f"Seçilen Modül: {modul}")
-        
+
         st.markdown("### 📌 Modül Özeti")
         st.markdown(lesson["summary"])
-        
+
         st.markdown("### 🧩 Kavramsal Harita (Infografik Tarzı)")
         c1, c2 = st.columns(2)
         with c1:
             st.markdown(
                 f"""
 <div class="info-card">
-<b>👀 Odak Noktası</b><br>
-{modul} modülünün temel amacı, MDR kapsamında bu başlığın neyi temsil ettiğini
-ve diğer modüllerle ilişkisini kavratmaktır.
+  <b>👀 Odak Noktası</b><br>
+  {modul} modülünün temel amacı, MDR kapsamında bu başlığın neyi temsil ettiğini ve diğer modüllerle ilişkisini kavratmaktır.
 </div>
 """,
                 unsafe_allow_html=True,
@@ -1272,11 +1339,11 @@ ve diğer modüllerle ilişkisini kavratmaktır.
             st.markdown(
                 """
 <div class="info-card">
-<b>🔗 İlişkili Modüller</b><br>
-- Teknik Dosya ile izlenebilirlik<br>
-- Risk Yönetimi ile güvenlik<br>
-- Klinik Değerlendirme ile klinik kanıt<br>
-- PMS/PMCF ile yaşam döngüsü yaklaşımı
+  <b>🔗 İlişkili Modüller</b><br>
+  - Teknik Dosya ile izlenebilirlik<br>
+  - Risk Yönetimi ile güvenlik<br>
+  - Klinik Değerlendirme ile klinik kanıt<br>
+  - PMS/PMCF ile yaşam döngüsü yaklaşımı
 </div>
 """,
                 unsafe_allow_html=True,
@@ -1286,27 +1353,28 @@ ve diğer modüllerle ilişkisini kavratmaktır.
         for section in lesson["sections"]:
             with st.expander(section["title"], expanded=False):
                 st.markdown(section["body"])
-        
+
         st.markdown("### ⚠️ Kritik Noktalar")
         for kp in lesson["key_points"]:
             st.markdown(f"- {kp}")
-        
+
         st.markdown("### 📖 İlgili MDR / ISO Referansları")
         for r in lesson["refs"]:
             st.markdown(f"- {r}")
-        
+
         if lesson["examples"]:
             st.markdown("### 🧪 Örnek Cihaz / Senaryolar")
             for ex in lesson["examples"]:
                 st.markdown(f"- {ex}")
-        
+
         if lesson["pitfalls"]:
             st.markdown("### ❗ Sık Yapılan Hatalar")
             for pit in lesson["pitfalls"]:
                 st.markdown(f"- {pit}")
-        
+
         st.markdown("---")
         st.markdown("### 🧠 Mini Quiz — Bu modülü ne kadar anladın?")
+
         questions = MODULE_QUIZZES[modul]
         for idx, q in enumerate(questions):
             st.markdown(f"**Soru {idx+1}: {q['question']}**")
@@ -1314,9 +1382,9 @@ ve diğer modüllerle ilişkisini kavratmaktır.
                 "Seçimin:",
                 q["options"],
                 key=f"edu_{modul}_q{idx}",
-                label_visibility="collapsed"
+                label_visibility="collapsed",
             )
-        
+
         if st.button("✅ Cevapları Kontrol Et", key="edu_quiz_check"):
             correct = 0
             total = len(questions)
@@ -1338,6 +1406,7 @@ ve diğer modüllerle ilişkisini kavratmaktır.
 # --- TAB 2: QUIZ ---
 with tab_quiz:
     st.markdown("### 🧠 Gelişmiş Soru Bankası (V3.0)")
+
     if "current_q" not in st.session_state:
         st.session_state.current_q = None
     if "quiz_score" not in st.session_state:
@@ -1354,9 +1423,8 @@ with tab_quiz:
         qtype = st.selectbox(
             "Soru tipi",
             ["Çoktan Seçmeli", "Doğru/Yanlış", "Vaka Analizi", "Açık Uçlu"],
-            index=0
+            index=0,
         )
-
     st.caption("Not: Vaka / Açık uçlu sorularda cevapların değerlendirmesi de AI tarafından yapılır.")
 
     if st.button("🎲 Yeni Soru Getir", key="new_ai_q"):
@@ -1394,7 +1462,7 @@ with tab_quiz:
                 "Cevabın (açık uçlu):",
                 key="ai_q_open",
                 height=200,
-                placeholder="Buraya MDR perspektifinden cevabını yaz..."
+                placeholder="Buraya MDR perspektifinden cevabını yaz...",
             )
 
         if st.button("✅ Cevabı Değerlendir", key="ai_q_check"):
@@ -1405,7 +1473,13 @@ with tab_quiz:
                     correct = q.get("dogru_cevap")
                     explanation = q.get("aciklama", "")
                     hints = q.get("ipuclari", "")
-                    if user_answer_mc == correct:
+                    options = q.get("secenekler") or []
+                    if not options and tur == "dogru_yanlis":
+                        options = ["Doğru", "Yanlış"]
+
+                    matched = is_answer_correct(user_answer_mc, correct, options)
+
+                    if matched:
                         st.success("✅ Doğru cevap!")
                         st.markdown(f"**Açıklama:** {explanation}")
                         if hints:
@@ -1415,12 +1489,22 @@ with tab_quiz:
                         st.error(
                             f"❌ Yanlış cevap.\n\n"
                             f"Senin cevabın: **{user_answer_mc}**\n\n"
-                            f"Doğru cevap: **{correct}**"
+                            f"Modelin döndürdüğü doğru cevap: **{correct}**"
                         )
                         st.markdown(f"**Açıklama:** {explanation}")
                         if hints:
                             st.info(f"İpucu / Ek Not: {hints}")
+
+                        # DEBUG BLOĞU – cevap neden yanlış sayılmış görebilmek için
+                        with st.expander("🔍 DEBUG: Cevap Karşılaştırma Detayları"):
+                            st.write("Kullanıcı cevabı:", repr(user_answer_mc))
+                            st.write("Model doğru_cevap:", repr(correct))
+                            st.write("Seçenekler:", options)
+                            st.write("normalize(user_answer):", normalize_answer(user_answer_mc))
+                            st.write("normalize(dogru_cevap):", normalize_answer(correct))
+
                     st.caption(f"Toplam skor: {st.session_state.quiz_score} puan")
+
                 else:
                     if not user_answer_open or user_answer_open.strip() == "":
                         st.error("Lütfen önce bir cevap yaz.")
@@ -1430,7 +1514,7 @@ with tab_quiz:
                                 api_key,
                                 q,
                                 user_answer_open,
-                                st.session_state.current_q_difficulty
+                                st.session_state.current_q_difficulty,
                             )
                             if result is None:
                                 st.error("Değerlendirme yapılamadı (API hatası).")
@@ -1439,6 +1523,7 @@ with tab_quiz:
                                 deger = result.get("degerlendirme", "")
                                 eksikler = result.get("eksikler", "")
                                 guclu = result.get("guclu_yonler", "")
+
                                 if puan >= 75:
                                     st.success(f"Skor: {puan} / 100 ✅ (Gayet iyi)")
                                 elif puan >= 50:
@@ -1469,9 +1554,12 @@ with tab_asistan:
         mode = st.selectbox(
             "Asistan Modu",
             ["Eğitmen Modu", "Denetçi Modu", "Teknik Dosya Modu", "Risk Analizi Modu"],
-            index=["Eğitmen Modu", "Denetçi Modu", "Teknik Dosya Modu", "Risk Analizi Modu"].index(
-                st.session_state.assistant_mode
-            ),
+            index=[
+                "Eğitmen Modu",
+                "Denetçi Modu",
+                "Teknik Dosya Modu",
+                "Risk Analizi Modu",
+            ].index(st.session_state.assistant_mode),
         )
         st.session_state.assistant_mode = mode
     with colm2:
@@ -1482,12 +1570,11 @@ with tab_asistan:
             "• Teknik Dosya: Annex II/III yapısı\n"
             "• Risk Analizi: ISO 14971 & senaryo"
         )
-
-    st.caption(f"Aktif mod: **{st.session_state.assistant_mode}**")
+        st.caption(f"Aktif mod: **{st.session_state.assistant_mode}**")
 
     for msg in st.session_state.chat_history:
         st.chat_message(msg["role"]).write(msg["content"])
-        
+
     if prompt := st.chat_input("MDR ile ilgili sorunuzu / talebinizi yazın..."):
         if not api_key:
             st.error("Önce Google API anahtarını girmen gerekiyor.")
@@ -1504,7 +1591,7 @@ with tab_asistan:
                             st.session_state.assistant_mode,
                             ctx,
                             prompt,
-                            focus
+                            focus,
                         )
                         res = model.generate_content(full_prompt).text
                         st.write(res)
@@ -1538,7 +1625,7 @@ with tab_auditor:
         scenario_key = st.selectbox(
             "Denetim Senaryosu",
             list(AUDIT_SCENARIOS.keys()),
-            index=list(AUDIT_SCENARIOS.keys()).index(st.session_state.audit_scenario)
+            index=list(AUDIT_SCENARIOS.keys()).index(st.session_state.audit_scenario),
         )
         st.session_state.audit_scenario = scenario_key
         st.markdown("#### Senaryo Açıklaması")
@@ -1551,6 +1638,7 @@ with tab_auditor:
             st.metric("Toplam Skor", f"{st.session_state.audit_score} / {total_possible}", f"{avg:.1f} %")
         else:
             st.metric("Toplam Skor", "0 / 0", "+0.0 %")
+
         st.markdown("#### Şu ana kadar tespit edilen NC'ler")
         if st.session_state.audit_nc_list:
             for nc in st.session_state.audit_nc_list:
@@ -1580,7 +1668,7 @@ with tab_auditor:
         role = "assistant" if msg["role"] == "assistant" else "user"
         avatar = "👮‍♂️" if role == "assistant" else None
         st.chat_message(role, avatar=avatar).write(msg["content"])
-    
+
     reply = st.chat_input("Cevabınız...")
     if reply:
         if not api_key:
@@ -1592,7 +1680,6 @@ with tab_auditor:
         else:
             st.session_state.audit_hist.append({"role": "user", "content": reply})
             st.chat_message("user").write(reply)
-
             with st.chat_message("assistant", avatar="👮‍♂️"):
                 with st.spinner("Denetçi cevabınızı değerlendiriyor..."):
                     try:
@@ -1600,7 +1687,7 @@ with tab_auditor:
                             api_key,
                             st.session_state.audit_scenario_desc,
                             st.session_state.audit_last_question,
-                            reply
+                            reply,
                         )
                         puan = int(result.get("puan", 0))
                         deger = result.get("degerlendirme", "")
@@ -1608,8 +1695,11 @@ with tab_auditor:
                         next_q = result.get("sonraki_soru", "").strip()
                         done = bool(result.get("tamamlandi_mi", False))
 
-                        if puan < 0: puan = 0
-                        if puan > 5: puan = 5
+                        if puan < 0:
+                            puan = 0
+                        if puan > 5:
+                            puan = 5
+
                         st.session_state.audit_score += puan
                         st.session_state.audit_q_count += 1
                         if ncs:
@@ -1625,7 +1715,10 @@ with tab_auditor:
 
                         total_possible = st.session_state.audit_q_count * 5
                         avg = st.session_state.audit_score / total_possible * 100
-                        st.info(f"Şu ana kadarki toplam skorun: {st.session_state.audit_score} / {total_possible} ({avg:.1f} %)")
+                        st.info(
+                            f"Şu ana kadarki toplam skorun: {st.session_state.audit_score} / "
+                            f"{total_possible} ({avg:.1f} %)"
+                        )
 
                         eval_text = (
                             f"Bu sorudan aldığın puan: {puan} / 5\n\n"
@@ -1638,7 +1731,9 @@ with tab_auditor:
                         max_q = 5
                         if done or not next_q or st.session_state.audit_q_count >= max_q:
                             st.session_state.audit_finished = True
-                            st.success("Denetim oturumu tamamlandı. Yukarıdaki NC listesi ve skor, genel performansını özetliyor.")
+                            st.success(
+                                "Denetim oturumu tamamlandı. Yukarıdaki NC listesi ve skor, genel performansını özetliyor."
+                            )
                         else:
                             st.session_state.audit_last_question = next_q
                             st.session_state.audit_hist.append({"role": "assistant", "content": next_q})
@@ -1648,11 +1743,9 @@ with tab_auditor:
 # --- TAB 5: DOKÜMAN FABRİKASI ---
 with tab_docgen:
     st.markdown("### 📝 Doküman Fabrikası (V6.0)")
-    sub_tab1, sub_tab2, sub_tab3 = st.tabs([
-        "📄 Klasik Taslak Doküman",
-        "✅ GSPR Matrisi (Annex I)",
-        "⚠️ Risk Analizi Tablosu (ISO 14971)"
-    ])
+    sub_tab1, sub_tab2, sub_tab3 = st.tabs(
+        ["📄 Klasik Taslak Doküman", "✅ GSPR Matrisi (Annex I)", "⚠️ Risk Analizi Tablosu (ISO 14971)"]
+    )
 
     def common_device_inputs(prefix: str = ""):
         d_name = st.text_input(f"{prefix}Cihaz Adı", key=f"{prefix}_name")
@@ -1660,7 +1753,7 @@ with tab_docgen:
             f"{prefix}Cihaz Tanımı / Intended Purpose Özeti",
             key=f"{prefix}_desc",
             height=120,
-            placeholder="Cihazın klinik amacı, kullanıcı profili, kullanım ortamı, temel teknolojisi vb. özetleyin..."
+            placeholder="Cihazın klinik amacı, kullanıcı profili, kullanım ortamı, temel teknolojisi vb. özetleyin...",
         )
         return d_name, d_desc
 
@@ -1669,7 +1762,7 @@ with tab_docgen:
         st.markdown("Bu bölüm, klasik doküman taslağını üretir.")
         d_name, d_desc = common_device_inputs("classic")
         d_type = st.selectbox("Doküman Tipi", ["PMS Planı", "Risk Analizi", "GSPR"], key="classic_type")
-        
+
         if st.button("Taslağı Oluştur", key="classic_btn"):
             if not api_key:
                 st.error("Önce Google API anahtarını gir.")
@@ -1696,7 +1789,6 @@ with tab_docgen:
     with sub_tab2:
         st.markdown("Bu bölüm, cihazın için örnek bir **GSPR matrisi** (Annex I) taslağı üretir.")
         d_name_g, d_desc_g = common_device_inputs("gspr")
-
         col_g1, col_g2 = st.columns(2)
         with col_g1:
             st.caption("Çıktı: Annex I maddelerine göre yapılandırılmış kısa GSPR matrisi.")
@@ -1724,11 +1816,17 @@ with tab_docgen:
                             st.download_button(
                                 "JSON Olarak İndir",
                                 json_str.encode("utf-8"),
-                                file_name=f"{d_name_g}_GSPR_Matrisi.json"
+                                file_name=f"{d_name_g}_GSPR_Matrisi.json",
                             )
 
-                            headers = ["gspr_no", "baslik", "gereklilik_ozeti", "uygulanabilirlik",
-                                       "uygunluk_gosterimi", "dokuman_referansi"]
+                            headers = [
+                                "gspr_no",
+                                "baslik",
+                                "gereklilik_ozeti",
+                                "uygulanabilirlik",
+                                "uygunluk_gosterimi",
+                                "dokuman_referansi",
+                            ]
                             csv_lines = [",".join(headers)]
                             for r in rows:
                                 line = []
@@ -1740,7 +1838,7 @@ with tab_docgen:
                             st.download_button(
                                 "CSV Olarak İndir",
                                 csv_content.encode("utf-8"),
-                                file_name=f"{d_name_g}_GSPR_Matrisi.csv"
+                                file_name=f"{d_name_g}_GSPR_Matrisi.csv",
                             )
                     except Exception as e:
                         handle_api_error(e)
@@ -1749,12 +1847,14 @@ with tab_docgen:
     with sub_tab3:
         st.markdown("Bu bölüm, cihaz için örnek bir **ISO 14971 uyumlu risk analizi tablosu** üretir.")
         d_name_r, d_desc_r = common_device_inputs("risk")
-
         col_r1, col_r2 = st.columns(2)
         with col_r1:
             st.caption("Çıktı: Hazard → Sequence → Hazardous Situation → Harm zincirine göre riskler.")
         with col_r2:
-            st.caption("Not: Bu tablo, kendi risk yönetimi dosyan için başlangıç noktasıdır, doğrudan kopyala-yapıştır değil.")
+            st.caption(
+                "Not: Bu tablo, kendi risk yönetimi dosyan için başlangıç noktasıdır, "
+                "doğrudan kopyala-yapıştır değil."
+            )
 
         if st.button("Risk Analizi Tablosu Oluştur", key="risk_btn"):
             if not api_key:
@@ -1777,14 +1877,20 @@ with tab_docgen:
                             st.download_button(
                                 "JSON Olarak İndir",
                                 json_str.encode("utf-8"),
-                                file_name=f"{d_name_r}_Risk_Analizi.json"
+                                file_name=f"{d_name_r}_Risk_Analizi.json",
                             )
 
                             headers = [
-                                "hazard", "sequence_of_events", "hazardous_situation",
-                                "harm", "initial_severity", "initial_probability",
-                                "risk_controls", "residual_severity", "residual_probability",
-                                "risk_evaluation"
+                                "hazard",
+                                "sequence_of_events",
+                                "hazardous_situation",
+                                "harm",
+                                "initial_severity",
+                                "initial_probability",
+                                "risk_controls",
+                                "residual_severity",
+                                "residual_probability",
+                                "risk_evaluation",
                             ]
                             csv_lines = [",".join(headers)]
                             for r in rows:
@@ -1797,7 +1903,7 @@ with tab_docgen:
                             st.download_button(
                                 "CSV Olarak İndir",
                                 csv_content.encode("utf-8"),
-                                file_name=f"{d_name_r}_Risk_Analizi.csv"
+                                file_name=f"{d_name_r}_Risk_Analizi.csv",
                             )
                     except Exception as e:
                         handle_api_error(e)
@@ -1852,20 +1958,22 @@ with tab_trace:
                 risk_ozet = item.get("risk_ozet", "")
                 gspr_list = ", ".join(item.get("gspr_list", []))
                 base_risk = risk_rows[idx] if 0 <= idx < len(risk_rows) else {}
-                display_rows.append({
-                    "Risk Index": idx,
-                    "Hazard": base_risk.get("hazard", ""),
-                    "Harm": base_risk.get("harm", ""),
-                    "Risk Özeti": risk_ozet,
-                    "İlgili GSPR No'lar": gspr_list,
-                })
+                display_rows.append(
+                    {
+                        "Risk Index": idx,
+                        "Hazard": base_risk.get("hazard", ""),
+                        "Harm": base_risk.get("harm", ""),
+                        "Risk Özeti": risk_ozet,
+                        "İlgili GSPR No'lar": gspr_list,
+                    }
+                )
             st.table(display_rows)
 
             json_str = json.dumps(trace, indent=2, ensure_ascii=False)
             st.download_button(
                 "İzlenebilirlik Matrisini JSON Olarak İndir",
                 json_str.encode("utf-8"),
-                file_name="Traceability_Matrix.json"
+                file_name="Traceability_Matrix.json",
             )
 
             headers = ["risk_index", "risk_ozet", "gspr_list"]
@@ -1879,7 +1987,7 @@ with tab_trace:
             st.download_button(
                 "İzlenebilirlik Matrisini CSV Olarak İndir",
                 csv_content.encode("utf-8"),
-                file_name="Traceability_Matrix.csv"
+                file_name="Traceability_Matrix.csv",
             )
 
             st.markdown("#### Kısa Yorum")
@@ -1926,7 +2034,7 @@ with tab_plan:
                             device_name_for_plan,
                             gspr_rows,
                             risk_rows,
-                            trace
+                            trace,
                         )
                         st.session_state.checklist_plan = data
                     except Exception as e:
@@ -1941,39 +2049,43 @@ with tab_plan:
             if checklist:
                 display_rows = []
                 for item in checklist:
-                    display_rows.append({
-                        "Madde": item.get("madde", ""),
-                        "Kaynak": item.get("kaynak", ""),
-                        "Tip": item.get("tip", ""),
-                    })
+                    display_rows.append(
+                        {
+                            "Madde": item.get("madde", ""),
+                            "Kaynak": item.get("kaynak", ""),
+                            "Tip": item.get("tip", ""),
+                        }
+                    )
                 st.table(display_rows)
 
                 json_str = json.dumps(checklist, indent=2, ensure_ascii=False)
                 st.download_button(
                     "Checklist'i JSON Olarak İndir",
                     json_str.encode("utf-8"),
-                    file_name=f"{device_name_for_plan}_Denetim_Checklist.json"
+                    file_name=f"{device_name_for_plan}_Denetim_Checklist.json",
                 )
 
             st.markdown("#### 🧪 Test Planı")
             if test_plan:
                 display_rows_t = []
                 for t in test_plan:
-                    display_rows_t.append({
-                        "Test Adı": t.get("test_adi", ""),
-                        "Amaç": t.get("amac", ""),
-                        "İlgili GSPR": ", ".join(t.get("iliskili_gspr", [])),
-                        "İlgili Risk Index": ", ".join(str(x) for x in t.get("iliskili_riskler", [])),
-                        "Test Tipi": t.get("test_tipi", ""),
-                        "Öncelik": t.get("oncelik", ""),
-                    })
+                    display_rows_t.append(
+                        {
+                            "Test Adı": t.get("test_adi", ""),
+                            "Amaç": t.get("amac", ""),
+                            "İlgili GSPR": ", ".join(t.get("iliskili_gspr", [])),
+                            "İlgili Risk Index": ", ".join(str(x) for x in t.get("iliskili_riskler", [])),
+                            "Test Tipi": t.get("test_tipi", ""),
+                            "Öncelik": t.get("oncelik", ""),
+                        }
+                    )
                 st.table(display_rows_t)
 
                 json_str_t = json.dumps(test_plan, indent=2, ensure_ascii=False)
                 st.download_button(
                     "Test Planını JSON Olarak İndir",
                     json_str_t.encode("utf-8"),
-                    file_name=f"{device_name_for_plan}_Test_Plan.json"
+                    file_name=f"{device_name_for_plan}_Test_Plan.json",
                 )
 
             if checklist or test_plan:
@@ -1993,17 +2105,46 @@ with tab_stock:
         "istasyonları için operatör kullanım kılavuzu oluştur."
     )
 
-    uploaded_file = st.file_uploader("Stok listeni yükle (CSV / Excel)", type=["csv", "xlsx", "xls"])
+    uploaded_file = st.file_uploader(
+        "Stok listeni yükle (CSV / Excel)", type=["csv", "xlsx", "xls"]
+    )
+
+    df = None
+    read_error = False
 
     if uploaded_file is not None:
-        # Dosyayı içeri al
+        # Dosyayı içeri al (DEBUG'li)
         try:
-            if uploaded_file.name.lower().endswith(".csv"):
+            filename = uploaded_file.name.lower()
+            st.write("DEBUG - Yüklenen dosya adı:", filename)
+
+            if filename.endswith(".csv"):
                 df = pd.read_csv(uploaded_file)
+            elif filename.endswith(".xls"):
+                # Eski Excel formatı: xlrd gerekiyor
+                try:
+                    df = pd.read_excel(uploaded_file, engine="xlrd")
+                except ImportError as ie:
+                    read_error = True
+                    st.error(
+                        "Bu uygulama `.xls` formatını okumak için `xlrd` paketine ihtiyaç duyuyor, "
+                        "ancak şu anda yüklü değil.\n\n"
+                        "Terminalden aşağıdaki komutla kurabilirsin:\n\n"
+                        "`pip install xlrd>=2.0.1`\n\n"
+                        "Alternatif olarak dosyanı Excel'de açıp `.xlsx` olarak kaydedip tekrar yükleyebilirsin."
+                    )
+                    st.write("DEBUG - xlrd import hatası:", ie)
+                    df = None
             else:
-                df = pd.read_excel(uploaded_file)
+                # .xlsx vb. için openpyxl kullan
+                df = pd.read_excel(uploaded_file, engine="openpyxl")
+
+            if df is not None:
+                st.write("DEBUG - Okunan dataframe shape:", df.shape)
         except Exception as e:
-            st.error(f"Dosya okunurken hata oluştu: {e}")
+            read_error = True
+            st.error(f"Dosya okunurken beklenmeyen bir hata oluştu: {e}")
+            st.write("DEBUG - Dosya okuma genel hata, dosya adı:", uploaded_file.name)
             df = None
 
         if df is not None and not df.empty:
@@ -2015,13 +2156,13 @@ with tab_stock:
                 "Ürün adı sütunu",
                 cols,
                 index=0,
-                key="stock_name_col"
+                key="stock_name_col",
             )
             desc_col = st.selectbox(
                 "Ürün açıklaması / intended purpose sütunu",
                 cols,
                 index=1 if len(cols) > 1 else 0,
-                key="stock_desc_col"
+                key="stock_desc_col",
             )
 
             max_n = len(df)
@@ -2030,10 +2171,13 @@ with tab_stock:
                 min_value=1,
                 max_value=max_n,
                 value=min(10, max_n),
-                step=1
+                step=1,
             )
 
-            if st.button("Ürünleri Sınıflandır ve İstasyon Talimatlarını Oluştur", key="stock_run_btn"):
+            if st.button(
+                "Ürünleri Sınıflandır ve İstasyon Talimatlarını Oluştur",
+                key="stock_run_btn",
+            ):
                 if not api_key:
                     st.error("Önce Google API anahtarını gir.")
                 else:
@@ -2046,13 +2190,12 @@ with tab_stock:
                                 continue
                             if not desc:
                                 desc = name  # açıklama boşsa en azından isim kullan
-
                             try:
                                 res = classify_and_build_work_instructions(
                                     api_key,
                                     name,
                                     desc,
-                                    context_text
+                                    context_text,
                                 )
                                 res["row_index"] = int(idx)
                                 results.append(res)
@@ -2063,13 +2206,21 @@ with tab_stock:
                     if results:
                         st.session_state.stock_analysis_results = results
                         st.success(f"{len(results)} ürün için sınıf ve talimat üretildi.")
+                    else:
+                        st.warning("Analiz sonucu üretilemedi.")
         else:
-            st.warning("Dosya boş görünüyor veya okunamadı.")
+            if df is not None and df.empty:
+                st.warning("Dosya boş görünüyor (satır bulunamadı).")
+            elif read_error:
+                st.info("Yukarıdaki hata nedeniyle dosya işlenemedi. (DEBUG bilgilerine bakabilirsin.)")
+            else:
+                st.warning("Dosya boş görünüyor veya okunamadı.")
 
     # Sonuçlar varsa göster
     results = st.session_state.get("stock_analysis_results") if "stock_analysis_results" in st.session_state else None
     if results:
         st.markdown("### 📊 Analiz Sonuçları")
+
         station_labels = {
             "sayim": "1️⃣ Sayım",
             "kumlama": "2️⃣ Kumlama",
@@ -2099,8 +2250,10 @@ with tab_stock:
                         amac = data.get("amaç") or data.get("amac", "")
                         if amac:
                             st.markdown(f"**Amaç:** {amac}")
+
                         kritikler = data.get("kritik_noktalar", [])
                         kayitlar = data.get("kayıtlar", []) or data.get("kayitlar", [])
+
                         if kritikler:
                             st.markdown("**Kritik Noktalar:**")
                             for k in kritikler:
@@ -2116,7 +2269,7 @@ with tab_stock:
             "Tüm Sonuçları JSON Olarak İndir",
             json_all.encode("utf-8"),
             file_name="Stok_Proses_Analizi.json",
-            key="stock_json_dl"
+            key="stock_json_dl",
         )
     else:
         st.caption("Henüz analiz edilmiş stok ürünü yok. Dosya yükleyip butona basarak başlayabilirsin.")
