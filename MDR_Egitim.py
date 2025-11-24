@@ -7,9 +7,9 @@ import random
 import pandas as pd  # Stok listesi için
 
 # -----------------------------------------------------------------------------
-# 1. AYARLAR VE STİL (DARK MEDICAL PRO) – V8.0
+# 1. AYARLAR VE STİL (DARK MEDICAL PRO) – V8.1
 # -----------------------------------------------------------------------------
-st.set_page_config(page_title="MDR Uzmanlık Akademisi v8.0", layout="wide", page_icon="🎓")
+st.set_page_config(page_title="MDR Uzmanlık Akademisi v8.1", layout="wide", page_icon="🎓")
 
 st.markdown("""
 <style>
@@ -1122,7 +1122,7 @@ NOTLAR:
     return data
 
 
-# --- Yardımcı fonksiyonlar: MC cevap eşleştirme (YENİ) ---
+# --- Yardımcı fonksiyonlar: MC cevap eşleştirme ---
 def _normalize_text(s: str) -> str:
     """Boşluk ve büyük/küçük harf duyarsız karşılaştırma için normalize eder."""
     if s is None:
@@ -1133,9 +1133,6 @@ def _normalize_text(s: str) -> str:
 def get_canonical_correct_option(question_dict):
     """
     Gemini'nin ürettiği JSON içinden gerçek doğru şıkkı bulur.
-    - dogru_cevap doğrudan şık metni olabilir
-    - sadece 'A', 'B', 'C', 'D' olabilir
-    - uzun bir açıklama içinde şık metni geçiyor olabilir
     """
     options = question_dict.get("secenekler") or []
     correct_raw = (question_dict.get("dogru_cevap") or "").strip()
@@ -1168,10 +1165,10 @@ def get_canonical_correct_option(question_dict):
 
 
 # -----------------------------------------------------------------------------
-# 4. SIDEBAR (v8.0 – API KAYIT SİSTEMİ + DOKÜMAN DURUMU)
+# 4. SIDEBAR
 # -----------------------------------------------------------------------------
 with st.sidebar:
-    st.header("🎓 Denizin Akademi v8.0")
+    st.header("🎓 Denizin Akademi v8.1")
 
     # API kayıt alanı
     if "api_key" not in st.session_state:
@@ -1181,11 +1178,9 @@ with st.sidebar:
 
     # Secrets var mı?
     has_secret = False
-    secret_val = None
     try:
         if "GOOGLE_API_KEY" in st.secrets and st.secrets["GOOGLE_API_KEY"]:
             has_secret = True
-            secret_val = st.secrets["GOOGLE_API_KEY"]
     except Exception:
         has_secret = False
 
@@ -1241,7 +1236,7 @@ api_key = get_active_api_key_value()
 # 5. ANA EKRAN
 # -----------------------------------------------------------------------------
 st.markdown(
-    '<div class="header-box"><h1>🏥 MDR Uzmanlık Akademisi v8.0</h1></div>',
+    '<div class="header-box"><h1>🏥 MDR Uzmanlık Akademisi v8.1</h1></div>',
     unsafe_allow_html=True
 )
 
@@ -1350,9 +1345,9 @@ with tab_egitim:
                     )
             st.info(f"Toplam Skor: {correct} / {total}")
 
-# --- TAB 2: QUIZ (Gelişmiş Soru Bankası + YENİ DAVRANIŞ) ---
+# --- TAB 2: QUIZ (Gelişmiş Soru Bankası + Fixli) ---
 with tab_quiz:
-    st.markdown("### 🧠 Gelişmiş Soru Bankası (V3.0)")
+    st.markdown("### 🧠 Gelişmiş Soru Bankası (V3.1 – Widget Key Fix)")
 
     # State init
     if "current_q" not in st.session_state:
@@ -1363,10 +1358,11 @@ with tab_quiz:
         st.session_state.current_q_difficulty = "Orta"
     if "current_q_type" not in st.session_state:
         st.session_state.current_q_type = "Çoktan Seçmeli"
-    if "ai_q_radio" not in st.session_state:
-        st.session_state.ai_q_radio = None
-    if "ai_q_open" not in st.session_state:
-        st.session_state.ai_q_open = ""
+    # Her soru için benzersiz id
+    if "q_counter" not in st.session_state:
+        st.session_state.q_counter = 0
+    if "current_q_id" not in st.session_state:
+        st.session_state.current_q_id = 0
 
     colq1, colq2 = st.columns(2)
     with colq1:
@@ -1380,7 +1376,7 @@ with tab_quiz:
     st.caption("Not: Vaka / Açık uçlu sorularda cevapların değerlendirmesi de AI tarafından yapılır.")
 
     def _fetch_new_ai_question(api_key, context_text, difficulty, qtype):
-        """Yeni soruyu üretip session_state'e yazar."""
+        """Yeni soruyu üretip session_state'e yazar; her soru için benzersiz id üretir."""
         if not api_key or not context_text:
             st.warning("API key veya doküman olmadığı için yeni soru üretilemedi.")
             return
@@ -1391,9 +1387,9 @@ with tab_quiz:
                 st.session_state.current_q = q
                 st.session_state.current_q_difficulty = difficulty
                 st.session_state.current_q_type = qtype
-                # önceki cevapları temizle
-                st.session_state.ai_q_radio = None
-                st.session_state.ai_q_open = ""
+                # yeni soru id
+                st.session_state.q_counter += 1
+                st.session_state.current_q_id = st.session_state.q_counter
             else:
                 st.error(
                     "Soru üretilemedi. Muhtemelen Google Gemini kotası dolu "
@@ -1409,6 +1405,11 @@ with tab_quiz:
         st.markdown("#### ❓ Soru")
         st.markdown(q["soru"])
 
+        # Bu soruya özel widget key'leri
+        q_id = st.session_state.current_q_id
+        radio_key = f"ai_q_radio_{q_id}"
+        open_key = f"ai_q_open_{q_id}"
+
         user_answer_mc = None
         user_answer_open = None
 
@@ -1419,12 +1420,12 @@ with tab_quiz:
             user_answer_mc = st.radio(
                 "Cevabın:",
                 options,
-                key="ai_q_radio"
+                key=radio_key
             )
         else:
             user_answer_open = st.text_area(
                 "Cevabın (açık uçlu):",
-                key="ai_q_open",
+                key=open_key,
                 height=200,
                 placeholder="Buraya MDR perspektifinden cevabını yaz..."
             )
@@ -1443,6 +1444,8 @@ with tab_quiz:
                     hints = q.get("ipuclari", "")
                     raw_correct = q.get("dogru_cevap", "")
                     canonical_correct = get_canonical_correct_option(q)
+
+                    user_answer_mc = st.session_state.get(radio_key, None)
 
                     if user_answer_mc is None:
                         st.error("Önce bir şık seçmelisin.")
@@ -1477,6 +1480,7 @@ with tab_quiz:
 
                 # Açık uçlu / vaka
                 else:
+                    user_answer_open = st.session_state.get(open_key, "")
                     if not user_answer_open or user_answer_open.strip() == "":
                         st.error("Lütfen önce bir cevap yaz.")
                     else:
