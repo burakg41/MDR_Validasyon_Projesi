@@ -6,6 +6,12 @@ import json
 import random
 import pandas as pd  # Stok listesi için
 
+# Word dosyaları için opsiyonel destek
+try:
+    from docx import Document
+except ImportError:
+    Document = None
+
 # -----------------------------------------------------------------------------
 # 1. AYARLAR VE STİL (DARK MEDICAL PRO) – V8.1
 # -----------------------------------------------------------------------------
@@ -571,26 +577,83 @@ def handle_api_error(e: Exception):
         st.error(f"Beklenmeyen bir hata oluştu:\n\n{msg}")
 
 
-@st.cache_resource
-def load_all_pdfs(folder_path="dokumanlar"):
+# --- GENEL DOKÜMAN YÜKLEME & OKUMA (PDF + DOCX + EXCEL) ---
+def load_all_documents(folder_path="dokumanlar"):
+    """
+    'dokumanlar' klasöründeki PDF, DOCX ve Excel dosyalarını okuyup tek bir bağlam
+    metni halinde döndürür. Okunamayan dosyalar listeye eklenir ama metne dahil edilmez.
+    """
     full_text = ""
     file_list = []
+
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
         return "", []
 
-    files = [f for f in os.listdir(folder_path) if f.endswith('.pdf')]
+    files = os.listdir(folder_path)
     for filename in files:
         file_path = os.path.join(folder_path, filename)
+        lower = filename.lower()
+
         try:
-            reader = PdfReader(file_path)
-            for page in reader.pages:
-                t = page.extract_text()
-                if t:
-                    full_text += t + "\n"
-            file_list.append(filename)
+            # PDF
+            if lower.endswith(".pdf"):
+                try:
+                    reader = PdfReader(file_path)
+                    for page in reader.pages:
+                        t = page.extract_text()
+                        if t:
+                            full_text += t + "\n"
+                    file_list.append(filename)
+                except Exception:
+                    file_list.append(filename)
+
+            # DOCX
+            elif lower.endswith(".docx"):
+                file_list.append(filename)
+                if Document is None:
+                    # python-docx yoksa sadece listede göster, metne ekleme
+                    continue
+                try:
+                    doc = Document(file_path)
+                    paragraphs = [p.text for p in doc.paragraphs if p.text]
+                    if paragraphs:
+                        full_text += "\n".join(paragraphs) + "\n"
+                except Exception:
+                    pass
+
+            # XLSX
+            elif lower.endswith(".xlsx"):
+                file_list.append(filename)
+                try:
+                    df = pd.read_excel(file_path, engine="openpyxl")
+                    txt = df.to_string(index=False)
+                    full_text += txt + "\n"
+                except Exception:
+                    pass
+
+            # XLS (xlrd yoksa sessizce atla)
+            elif lower.endswith(".xls"):
+                file_list.append(filename)
+                try:
+                    # Eğer ortamda xlrd yüklü ise okur, değilse ImportError verir
+                    df = pd.read_excel(file_path)
+                    txt = df.to_string(index=False)
+                    full_text += txt + "\n"
+                except ImportError:
+                    # Ortamda xlrd yok → sadece dosya adını listele, metne ekleme
+                    pass
+                except Exception:
+                    pass
+
+            else:
+                # Desteklenmeyen uzantı → sadece listede göster
+                file_list.append(filename)
+
         except Exception:
-            pass
+            # Herhangi bir dosyada problem olsa da diğerlerini okumaya devam et
+            file_list.append(filename)
+
     return full_text, file_list
 
 
@@ -907,7 +970,7 @@ Lütfen SADECE şu formatta JSON ver:
     "initial_probability": "P1-P5 arasında bir seviye",
     "risk_controls": "Tasarım, koruyucu önlemler, bilgi/etiketleme şeklinde özetle",
     "residual_severity": "Kontroller sonrasındaki şiddet seviyesi (S1-S5)",
-    "residual_probability": "Kontroller sonrasındaki olasılık seviyesi (P1-P5)",
+    "residual_probability": "Kontroller sonrasındaki olasılık seviyesi (P1-S5)",
     "risk_evaluation": "Kalan risk kabul edilebilir mi? Kabul kriterine atıf yap."
   }}
 ]
@@ -1214,12 +1277,12 @@ with st.sidebar:
                 st.info("Kayıtlı API anahtarı temizlendi.")
 
     st.markdown("---")
-    st.markdown("#### 📂 Doküman Yönetimi")
-    context_text, loaded_files = load_all_pdfs()
+    st.markdown("#### 📂 Doküman Yönetimi (PDF + Word + Excel)")
+    context_text, loaded_files = load_all_documents()
     if loaded_files:
-        st.success(f"{len(loaded_files)} Belge Aktif")
+        st.success(f"{len(loaded_files)} doküman aktif (dokumanlar klasöründe)")
     else:
-        st.warning("Belge Yok! 'dokumanlar' klasörünü kontrol et.")
+        st.warning("Doküman yok! 'dokumanlar' klasörünü kontrol et veya Asistan sekmesinden dosya yükle.")
 
     if 'working_model_name' in st.session_state:
         st.caption(f"🚀 Aktif Model: {st.session_state.working_model_name}")
@@ -1305,12 +1368,12 @@ with tab_egitim:
         for r in lesson["refs"]:
             st.markdown(f"- {r}")
 
-        if lesson["examples"]:
+        if lesson["examples"] and len(lesson["examples"]) > 0:
             st.markdown("### 🧪 Örnek Cihaz / Senaryolar")
             for ex in lesson["examples"]:
                 st.markdown(f"- {ex}")
 
-        if lesson["pitfalls"]:
+        if lesson["pitfalls"] and len(lesson["pitfalls"]) > 0:
             st.markdown("### ❗ Sık Yapılan Hatalar")
             for pit in lesson["pitfalls"]:
                 st.markdown(f"- {pit}")
@@ -1525,51 +1588,43 @@ with tab_quiz:
 
 # --- TAB 3: ASİSTAN ---
 with tab_asistan:
-    st.markdown("### 🤖 Akıllı MDR Asistanı (V4.1)")
+    st.markdown("### 🤖 Akıllı MDR Asistanı (V4.0)")
 
-    # 📂 Yeni: Asistan için sekme içi PDF yükleme (yaklaşık 400 MB'a kadar)
-    st.markdown("#### 📂 Asistan İçin Ek Doküman Yükle")
-
-    if "assistant_uploaded_text" not in st.session_state:
-        st.session_state.assistant_uploaded_text = ""
-    if "assistant_uploaded_files" not in st.session_state:
-        st.session_state.assistant_uploaded_files = []
+    # 🔽 YENİ: Asistan için doğrudan doküman yükleme (PDF + Word + Excel)
+    st.markdown("#### 📂 Bağlam Dokümanı Yükle (PDF / Word / Excel)")
+    st.caption(
+        "Buraya yüklediğin dosyalar `dokumanlar` klasörüne kaydedilir ve hem Akıllı Asistan hem de "
+        "Doküman Fabrikası / Quiz / Denetçi modülleri bu metni bağlam olarak kullanır.\n\n"
+        "Teorik olarak ~400 MB'a kadar dosya desteklenebilir; gerçek sınır bulunduğun sunucu/ortama bağlıdır."
+    )
 
     uploaded_docs = st.file_uploader(
-        "MDR / ISO PDF dokümanlarını buraya yükleyebilirsin (toplam ~400 MB'a kadar).",
-        type=["pdf"],
+        "MDR asistanının kullanacağı dokümanları yükle (.pdf, .docx, .xlsx, .xls)",
+        type=["pdf", "docx", "xlsx", "xls"],
         accept_multiple_files=True,
-        help="Yüklenen dosyalar sadece bu oturumda Akıllı MDR Asistanı için bağlam olarak kullanılacaktır."
+        key="assistant_docs"
     )
 
     if uploaded_docs:
-        # Aynı dosyaları her rerun'da tekrar parse etmemek için isim listesi ile kontrol
-        new_names = sorted([f.name for f in uploaded_docs])
-        if new_names != st.session_state.assistant_uploaded_files:
-            combined_text = ""
-            ok_names = []
-            for uf in uploaded_docs:
-                try:
-                    reader = PdfReader(uf)
-                    ok_names.append(uf.name)
-                    for page in reader.pages:
-                        t = page.extract_text()
-                        if t:
-                            combined_text += t + "\n"
-                except Exception as e:
-                    st.warning(f"{uf.name} okunurken hata oluştu: {e}")
-            if combined_text:
-                st.session_state.assistant_uploaded_text = combined_text
-                st.session_state.assistant_uploaded_files = new_names
-                st.success(f"{len(ok_names)} dosya yüklendi ve asistan bağlamına eklendi.")
-                st.caption("Yüklenen dosyalar: " + ", ".join(ok_names))
-        else:
-            if st.session_state.assistant_uploaded_files:
-                st.caption(
-                    "Önceden yüklenmiş dokümanlar asistan bağlamında kullanılmaya devam ediyor: "
-                    + ", ".join(st.session_state.assistant_uploaded_files)
-                )
+        os.makedirs("dokumanlar", exist_ok=True)
+        saved = 0
+        for up in uploaded_docs:
+            if up is None:
+                continue
+            filename = up.name
+            # Aynı isim varsa üzerine yazar, istersen burada versiyonlama ekleyebilirsin
+            file_path = os.path.join("dokumanlar", filename)
+            with open(file_path, "wb") as f:
+                f.write(up.getbuffer())
+            saved += 1
 
+        if saved > 0:
+            st.success(f"{saved} doküman 'dokumanlar' klasörüne kaydedildi.")
+            # Bağlamı anında güncelle
+            context_text, loaded_files = load_all_documents()
+            st.caption(f"Aktif doküman sayısı: {len(loaded_files)}")
+
+    # --- Chat state ---
     if "assistant_mode" not in st.session_state:
         st.session_state.assistant_mode = "Eğitmen Modu"
     if "chat_history" not in st.session_state:
@@ -1609,17 +1664,11 @@ with tab_asistan:
                 with st.spinner("Analiz ediliyor..."):
                     try:
                         model = get_working_model(api_key)
-
-                        # Global doküman + sekme içi yüklenen dokümanları birleştirilmiş bağlam olarak kullan
-                        base_ctx = context_text or ""
-                        extra_ctx = st.session_state.get("assistant_uploaded_text", "")
-                        merged_ctx = (base_ctx + "\n\n" + extra_ctx).strip() if extra_ctx else base_ctx
-                        ctx_for_assistant = merged_ctx[:8000] if merged_ctx else ""
-                        focus = detect_context_focus(ctx_for_assistant) if ctx_for_assistant else None
-
+                        ctx = context_text[:8000] if context_text else ""
+                        focus = detect_context_focus(context_text) if context_text else None
                         full_prompt = build_assistant_prompt(
                             st.session_state.assistant_mode,
-                            ctx_for_assistant,
+                            ctx,
                             prompt,
                             focus
                         )
@@ -1801,7 +1850,7 @@ with tab_docgen:
             if not api_key:
                 st.error("Önce Google API anahtarını gir.")
             elif not context_text:
-                st.error("Bağlam bulunamadı. 'dokumanlar' klasörüne PDF eklediğinden emin ol.")
+                st.error("Bağlam bulunamadı. 'dokumanlar' klasörüne PDF/Word/Excel dokümanı eklediğinden emin ol.")
             else:
                 with st.spinner("Yazılıyor..."):
                     try:
@@ -2140,20 +2189,14 @@ with tab_stock:
             elif file_name_lower.endswith(".xls"):
                 # Eski Excel formatı: xlrd gerektiriyor
                 try:
-                    import xlrd  # type: ignore
+                    df = pd.read_excel(uploaded_file, engine="xlrd")
                 except ImportError:
                     st.error(
-                        "❗ '.xls' uzantılı eski Excel dosyaları bu ortamda doğrudan okunamıyor.\n\n"
+                        "❗ '.xls' uzantılı dosyalar için 'xlrd' paketi bu ortamda yüklü değil.\n\n"
                         "Lütfen dosyanı Excel'de açıp 'Farklı Kaydet' ile **.xlsx** formatında "
                         "kaydet ve tekrar yükle."
                     )
                     df = None
-                else:
-                    try:
-                        df = pd.read_excel(uploaded_file, engine="xlrd")
-                    except Exception as e:
-                        st.error(f"'.xls' dosyası okunurken hata oluştu: {e}")
-                        df = None
             else:
                 st.error("Desteklenmeyen dosya uzantısı. Lütfen CSV, XLS veya XLSX yükleyin.")
                 df = None
