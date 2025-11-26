@@ -1525,7 +1525,50 @@ with tab_quiz:
 
 # --- TAB 3: ASİSTAN ---
 with tab_asistan:
-    st.markdown("### 🤖 Akıllı MDR Asistanı (V4.0)")
+    st.markdown("### 🤖 Akıllı MDR Asistanı (V4.1)")
+
+    # 📂 Yeni: Asistan için sekme içi PDF yükleme (yaklaşık 400 MB'a kadar)
+    st.markdown("#### 📂 Asistan İçin Ek Doküman Yükle")
+
+    if "assistant_uploaded_text" not in st.session_state:
+        st.session_state.assistant_uploaded_text = ""
+    if "assistant_uploaded_files" not in st.session_state:
+        st.session_state.assistant_uploaded_files = []
+
+    uploaded_docs = st.file_uploader(
+        "MDR / ISO PDF dokümanlarını buraya yükleyebilirsin (toplam ~400 MB'a kadar).",
+        type=["pdf"],
+        accept_multiple_files=True,
+        help="Yüklenen dosyalar sadece bu oturumda Akıllı MDR Asistanı için bağlam olarak kullanılacaktır."
+    )
+
+    if uploaded_docs:
+        # Aynı dosyaları her rerun'da tekrar parse etmemek için isim listesi ile kontrol
+        new_names = sorted([f.name for f in uploaded_docs])
+        if new_names != st.session_state.assistant_uploaded_files:
+            combined_text = ""
+            ok_names = []
+            for uf in uploaded_docs:
+                try:
+                    reader = PdfReader(uf)
+                    ok_names.append(uf.name)
+                    for page in reader.pages:
+                        t = page.extract_text()
+                        if t:
+                            combined_text += t + "\n"
+                except Exception as e:
+                    st.warning(f"{uf.name} okunurken hata oluştu: {e}")
+            if combined_text:
+                st.session_state.assistant_uploaded_text = combined_text
+                st.session_state.assistant_uploaded_files = new_names
+                st.success(f"{len(ok_names)} dosya yüklendi ve asistan bağlamına eklendi.")
+                st.caption("Yüklenen dosyalar: " + ", ".join(ok_names))
+        else:
+            if st.session_state.assistant_uploaded_files:
+                st.caption(
+                    "Önceden yüklenmiş dokümanlar asistan bağlamında kullanılmaya devam ediyor: "
+                    + ", ".join(st.session_state.assistant_uploaded_files)
+                )
 
     if "assistant_mode" not in st.session_state:
         st.session_state.assistant_mode = "Eğitmen Modu"
@@ -1566,11 +1609,17 @@ with tab_asistan:
                 with st.spinner("Analiz ediliyor..."):
                     try:
                         model = get_working_model(api_key)
-                        ctx = context_text[:8000] if context_text else ""
-                        focus = detect_context_focus(context_text) if context_text else None
+
+                        # Global doküman + sekme içi yüklenen dokümanları birleştirilmiş bağlam olarak kullan
+                        base_ctx = context_text or ""
+                        extra_ctx = st.session_state.get("assistant_uploaded_text", "")
+                        merged_ctx = (base_ctx + "\n\n" + extra_ctx).strip() if extra_ctx else base_ctx
+                        ctx_for_assistant = merged_ctx[:8000] if merged_ctx else ""
+                        focus = detect_context_focus(ctx_for_assistant) if ctx_for_assistant else None
+
                         full_prompt = build_assistant_prompt(
                             st.session_state.assistant_mode,
-                            ctx,
+                            ctx_for_assistant,
                             prompt,
                             focus
                         )
@@ -2091,14 +2140,20 @@ with tab_stock:
             elif file_name_lower.endswith(".xls"):
                 # Eski Excel formatı: xlrd gerektiriyor
                 try:
-                    df = pd.read_excel(uploaded_file, engine="xlrd")
+                    import xlrd  # type: ignore
                 except ImportError:
                     st.error(
-                        "❗ '.xls' uzantılı dosyalar için 'xlrd' paketi bu ortamda yüklü değil.\n\n"
+                        "❗ '.xls' uzantılı eski Excel dosyaları bu ortamda doğrudan okunamıyor.\n\n"
                         "Lütfen dosyanı Excel'de açıp 'Farklı Kaydet' ile **.xlsx** formatında "
                         "kaydet ve tekrar yükle."
                     )
                     df = None
+                else:
+                    try:
+                        df = pd.read_excel(uploaded_file, engine="xlrd")
+                    except Exception as e:
+                        st.error(f"'.xls' dosyası okunurken hata oluştu: {e}")
+                        df = None
             else:
                 st.error("Desteklenmeyen dosya uzantısı. Lütfen CSV, XLS veya XLSX yükleyin.")
                 df = None
